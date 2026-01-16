@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>WorkoutPAL</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            touch-action: manipulation;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .workout-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .workout-card:hover, .workout-card:active {
+            background: rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .workout-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .workout-card p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+
+        .edit-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+        }
+
+        .edit-icon .material-icons {
+            font-size: 16px;
+        }
+
+        .edit-icon:hover, .edit-icon:active {
+            opacity: 1;
+            background: rgba(102, 126, 234, 0.3);
+            transform: scale(1.1);
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+        }
+
+        .exercise-view {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .exercise-header {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .exercise-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .exercise-header .description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .reps-display {
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .sets-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .set-tile {
+            flex: 1;
+            min-width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .set-tile.checked {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+        }
+
+        .set-tile.current {
+            border-color: #667eea;
+            border-width: 3px;
+        }
+
+        .timer-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timer-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timer-display {
+            font-size: 72px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            touch-action: manipulation;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover, .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .edit-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .edit-field {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .edit-field:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .number-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .number-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .number-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: move;
+        }
+
+        .exercise-item.dragging {
+            opacity: 0.5;
+        }
+
+        .exercise-item h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .edit-mode-banner {
+            background: #667eea;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+
+    <script>
+        class WorkoutApp {
+            constructor() {
+                this.workouts = {
+                    abdominaux: { name: 'Abdominaux', exercises: [] },
+                    pectoraux: { name: 'Pectoraux', exercises: [] },
+                    avantBras: { name: 'Avant-bras', exercises: [] },
+                    biceps: { name: 'Biceps', exercises: [] },
+                    epaules: { name: 'Épaules', exercises: [] },
+                    dos: { name: 'Dos', exercises: [] }
+                };
+                this.currentWorkout = null;
+                this.currentExercise = null;
+                this.currentSet = 0;
+                this.checkedSets = [];
+                this.isResting = false;
+                this.timeLeft = 0;
+                this.isPaused = false;
+                this.editMode = false;
+                this.view = 'menu';
+                this.timerInterval = null;
+                this.wakeLock = null;
+
+                this.loadData();
+                this.requestWakeLock();
+                this.render();
+            }
+
+            async requestWakeLock() {
+                try {
+                    if ('wakeLock' in navigator) {
+                        this.wakeLock = await navigator.wakeLock.request('screen');
+                        document.addEventListener('visibilitychange', async () => {
+                            if (this.wakeLock !== null && document.visibilityState === 'visible') {
+                                this.wakeLock = await navigator.wakeLock.request('screen');
+                            }
+                        });
+                    }
+                } catch (err) {
+                    console.log('Wake Lock non supporté:', err);
+                }
+            }
+
+            loadData() {
+                try {
+                    const saved = localStorage.getItem('workouts');
+                    if (saved) {
+                        this.workouts = JSON.parse(saved);
+                    }
+                } catch (err) {
+                    console.log('Pas de données sauvegardées');
+                }
+            }
+
+            saveData() {
+                try {
+                    localStorage.setItem('workouts', JSON.stringify(this.workouts));
+                } catch (err) {
+                    console.error('Erreur de sauvegarde:', err);
+                }
+            }
+
+            startTimer(seconds) {
+                this.isResting = true;
+                this.timeLeft = seconds;
+                this.isPaused = false;
+                this.updateTimer();
+                this.render();
+            }
+
+            updateTimer() {
+                if (this.timerInterval) clearInterval(this.timerInterval);
+
+                this.timerInterval = setInterval(() => {
+                    if (!this.isPaused && this.timeLeft > 0) {
+                        this.timeLeft--;
+                        if (this.timeLeft === 0) {
+                            this.isResting = false;
+                            clearInterval(this.timerInterval);
+                        }
+                        this.render();
+                    }
+                }, 1000);
+            }
+
+            toggleTimer() {
+                this.isPaused = !this.isPaused;
+                this.render();
+            }
+
+            skipTimer() {
+                this.isResting = false;
+                this.timeLeft = 0;
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                this.render();
+            }
+
+            addTime(seconds) {
+                this.timeLeft += seconds;
+                this.render();
+            }
+
+            startWorkout(workoutKey) {
+                this.currentWorkout = workoutKey;
+                this.currentExercise = 0;
+                this.currentSet = 0;
+                this.checkedSets = [];
+                this.view = 'workout';
+                this.render();
+            }
+
+            toggleSet(setIndex) {
+                const index = this.checkedSets.indexOf(setIndex);
+                if (index > -1) {
+                    this.checkedSets.splice(index, 1);
+                } else {
+                    this.checkedSets.push(setIndex);
+
+                    const exercise = this.workouts[this.currentWorkout].exercises[this.currentExercise];
+                    if (this.checkedSets.length === exercise.sets) {
+                        this.completeExercise();
+                    } else if (setIndex === this.currentSet && setIndex < exercise.sets - 1) {
+                        this.currentSet = setIndex + 1;
+                        this.startTimer(exercise.restTime);
+                    }
+                }
+                this.render();
+            }
+
+            completeExercise() {
+                const workout = this.workouts[this.currentWorkout];
+                if (this.currentExercise < workout.exercises.length - 1) {
+                    this.currentExercise++;
+                    this.currentSet = 0;
+                    this.checkedSets = [];
+                    this.render();
+                } else {
+                    this.view = 'menu';
+                    this.currentWorkout = null;
+                    this.render();
+                }
+            }
+
+            goHome() {
+                this.view = 'menu';
+                this.currentWorkout = null;
+                this.editMode = false;
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                this.render();
+            }
+
+            toggleEditMode() {
+                this.editMode = !this.editMode;
+                this.render();
+            }
+
+            updateExercise(workoutKey, exIndex, field, value) {
+                this.workouts[workoutKey].exercises[exIndex][field] = value;
+                this.saveData();
+                this.render();
+            }
+
+            adjustValue(workoutKey, exIndex, field, delta) {
+                const current = this.workouts[workoutKey].exercises[exIndex][field];
+                const newValue = Math.max(1, current + delta);
+                this.updateExercise(workoutKey, exIndex, field, newValue);
+            }
+
+            addExercise(workoutKey) {
+                const newId = Date.now();
+                this.workouts[workoutKey].exercises.push({
+                    id: newId,
+                    name: 'Nouvel exercice',
+                    description: '',
+                    sets: 3,
+                    reps: 10,
+                    restTime: 60
+                });
+                this.saveData();
+                this.render();
+            }
+
+            deleteExercise(workoutKey, exIndex) {
+                if (confirm('Supprimer cet exercice ?')) {
+                    this.workouts[workoutKey].exercises.splice(exIndex, 1);
+                    this.saveData();
+                    this.render();
+                }
+            }
+
+            moveExercise(workoutKey, fromIndex, toIndex) {
+                const exercises = this.workouts[workoutKey].exercises;
+                const [moved] = exercises.splice(fromIndex, 1);
+                exercises.splice(toIndex, 0, moved);
+                this.saveData();
+                this.render();
+            }
+
+            editWorkout(workoutKey, event) {
+                event.stopPropagation();
+                this.currentWorkout = workoutKey;
+                this.view = 'edit';
+                this.render();
+            }
+
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            render() {
+                const app = document.getElementById('app');
+
+                if (this.view === 'menu') {
+                    app.innerHTML = this.renderMenu();
+                } else if (this.view === 'workout') {
+                    app.innerHTML = this.renderWorkout();
+                } else if (this.view === 'edit') {
+                    app.innerHTML = this.renderEdit();
+                }
+
+                this.attachEventListeners();
+            }
+
+            renderMenu() {
+                return `
+                    <div class="header">
+                        <h1>💪 WorkoutPAL</h1>
+                        <p>Sélectionnez votre séance</p>
+                    </div>
+                    <div class="menu-grid">
+                        ${Object.entries(this.workouts).map(([key, workout]) => `
+                            <div class="workout-card" onclick="app.startWorkout('${key}')">
+                                <div class="edit-icon" onclick="app.editWorkout('${key}', event)">
+                                    <span class="material-icons">edit</span>
+                                </div>
+                                <h3>${workout.name}</h3>
+                                <p>${workout.exercises.length} exercice${workout.exercises.length > 1 ? 's' : ''}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            renderWorkout() {
+                const workout = this.workouts[this.currentWorkout];
+                const exercise = workout.exercises[this.currentExercise];
+
+                if (!exercise) {
+                    return `
+                        <div class="header">
+                            <h1>Aucun exercice</h1>
+                            <p>Ajoutez des exercices en mode édition</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="app.goHome()">← Retour au menu</button>
+                    `;
+                }
+
+                const totalExercises = workout.exercises.length;
+                const currentExerciseNum = this.currentExercise + 1;
+                const progressPercent = (currentExerciseNum / totalExercises) * 100;
+
+                return `
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="app.goHome()">← Menu</button>
+                    </div>
+
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+                        </div>
+                        <div class="progress-text">${currentExerciseNum}/${totalExercises}</div>
+                    </div>
+
+                    <div class="exercise-view">
+                        <div class="exercise-header">
+                            <h2>${exercise.name}</h2>
+                            ${exercise.description ? `<div class="description">${exercise.description}</div>` : ''}
+                            <div class="reps-display">${exercise.reps} reps</div>
+                        </div>
+
+                        ${this.isResting ? `
+                            <div class="timer-container">
+                                <div class="timer-label">Repos</div>
+                                <div class="timer-display">${this.formatTime(this.timeLeft)}</div>
+                                <div class="timer-controls">
+                                    <button class="btn btn-secondary btn-small" onclick="app.toggleTimer()">
+                                        ${this.isPaused ? '▶️' : '⏸️'} ${this.isPaused ? 'Reprendre' : 'Pause'}
+                                    </button>
+                                    <button class="btn btn-secondary btn-small" onclick="app.addTime(20)">
+                                        +20s
+                                    </button>
+                                    <button class="btn btn-primary btn-small" onclick="app.skipTimer()">
+                                        Passer ⏭️
+                                    </button>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div class="sets-container">
+                            ${Array.from({ length: exercise.sets }, (_, i) => `
+                                <div class="set-tile ${this.checkedSets.includes(i) ? 'checked' : ''} ${i === this.currentSet && !this.checkedSets.includes(i) ? 'current' : ''}"
+                                     onclick="app.toggleSet(${i})">
+                                    ${this.checkedSets.includes(i) ? '✓' : `${i + 1}`}
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" 
+                                onclick="app.completeExercise()">
+                            ${this.currentExercise < workout.exercises.length - 1 ? 'Exercice suivant →' : 'Terminer la séance ✓'}
+                        </button>
+                    </div>
+                `;
+            }
+
+            renderEdit() {
+                const workout = this.workouts[this.currentWorkout];
+
+                return `
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="app.goHome()">← Menu</button>
+                    </div>
+
+                    <div class="header">
+                        <h1>${workout.name}</h1>
+                        <p>Mode édition</p>
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 20px;" 
+                            onclick="app.addExercise('${this.currentWorkout}')">
+                        + Ajouter un exercice
+                    </button>
+
+                    <div class="exercise-list" id="exerciseList">
+                        ${workout.exercises.map((exercise, index) => `
+                            <div class="exercise-item" draggable="true" data-index="${index}">
+                                <h3>${exercise.name}</h3>
+                                <div class="edit-controls">
+                                    <input type="text" class="edit-field" value="${exercise.name}" 
+                                           placeholder="Nom de l'exercice"
+                                           onchange="app.updateExercise('${this.currentWorkout}', ${index}, 'name', this.value)">
+                                </div>
+                                <div class="edit-controls">
+                                    <input type="text" class="edit-field" value="${exercise.description}" 
+                                           placeholder="Description"
+                                           onchange="app.updateExercise('${this.currentWorkout}', ${index}, 'description', this.value)">
+                                </div>
+                                <div class="edit-controls">
+                                    <span style="min-width: 80px;">Séries:</span>
+                                    <div class="number-control">
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentWorkout}', ${index}, 'sets', -1)">−</button>
+                                        <span class="number-display">${exercise.sets}</span>
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentWorkout}', ${index}, 'sets', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="edit-controls">
+                                    <span style="min-width: 80px;">Reps:</span>
+                                    <div class="number-control">
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentWorkout}', ${index}, 'reps', -1)">−</button>
+                                        <span class="number-display">${exercise.reps}</span>
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentWorkout}', ${index}, 'reps', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="edit-controls">
+                                    <span style="min-width: 80px;">Repos (s):</span>
+                                    <div class="number-control">
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentWorkout}', ${index}, 'restTime', -10)">−</button>
+                                        <span class="number-display">${exercise.restTime}</span>
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentWorkout}', ${index}, 'restTime', 10)">+</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-small" style="width: 100%; margin-top: 10px;"
+                                        onclick="app.deleteExercise('${this.currentWorkout}', ${index})">
+                                    🗑️ Supprimer
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            attachEventListeners() {
+                if (this.view === 'edit') {
+                    const list = document.getElementById('exerciseList');
+                    if (!list) return;
+
+                    let draggedElement = null;
+                    let draggedIndex = null;
+
+                    list.addEventListener('dragstart', (e) => {
+                        if (e.target.classList.contains('exercise-item')) {
+                            draggedElement = e.target;
+                            draggedIndex = parseInt(e.target.dataset.index);
+                            e.target.classList.add('dragging');
+                        }
+                    });
+
+                    list.addEventListener('dragend', (e) => {
+                        if (e.target.classList.contains('exercise-item')) {
+                            e.target.classList.remove('dragging');
+                        }
+                    });
+
+                    list.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        const afterElement = this.getDragAfterElement(list, e.clientY);
+                        if (afterElement == null) {
+                            list.appendChild(draggedElement);
+                        } else {
+                            list.insertBefore(draggedElement, afterElement);
+                        }
+                    });
+
+                    list.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        const items = [...list.querySelectorAll('.exercise-item')];
+                        const newIndex = items.indexOf(draggedElement);
+                        if (draggedIndex !== newIndex) {
+                            this.moveExercise(this.currentWorkout, draggedIndex, newIndex);
+                        }
+                    });
+                }
+            }
+
+            getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.exercise-item:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+        }
+
+        // Initialisation
+        const app = new WorkoutApp();
+
+        // Service Worker pour PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
