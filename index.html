@@ -721,11 +721,18 @@
                 this.timerInterval = setInterval(() => {
                     if (!this.isPaused && this.timeLeft > 0) {
                         this.timeLeft--;
+
+                        // Mise à jour uniquement du timer display sans re-render complet
+                        const timerDisplay = document.querySelector('.timer-display');
+                        if (timerDisplay) {
+                            timerDisplay.textContent = this.formatTime(this.timeLeft);
+                        }
+
                         if (this.timeLeft === 0) {
                             this.isResting = false;
                             clearInterval(this.timerInterval);
+                            this.render(); // Re-render complet seulement quand le timer se termine
                         }
-                        this.render();
                     }
                 }, 1000);
             }
@@ -744,7 +751,10 @@
 
             addTime(seconds) {
                 this.timeLeft += seconds;
-                this.render();
+                const timerDisplay = document.querySelector('.timer-display');
+                if (timerDisplay) {
+                    timerDisplay.textContent = this.formatTime(this.timeLeft);
+                }
             }
 
             viewCategory(categoryKey) {
