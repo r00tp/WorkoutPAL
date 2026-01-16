@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>WorkoutPAL</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            touch-action: manipulation;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .workout-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .workout-card:hover, .workout-card:active {
+            background: rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .workout-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .workout-card p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+
+        .edit-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+        }
+
+        .edit-icon .material-icons {
+            font-size: 16px;
+        }
+
+        .edit-icon:hover, .edit-icon:active {
+            opacity: 1;
+            background: rgba(102, 126, 234, 0.3);
+            transform: scale(1.1);
+        }
+
+        .session-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .session-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .session-card:hover, .session-card:active {
+            background: rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.4);
+            transform: translateX(5px);
+        }
+
+        .session-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .session-card p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        .session-card .last-completed {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+        }
+
+        .exercise-view {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .exercise-header {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .exercise-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .exercise-header .description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .reps-display {
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .sets-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .set-tile {
+            flex: 1;
+            min-width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .set-tile.checked {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+        }
+
+        .set-tile.current {
+            border-color: #667eea;
+            border-width: 3px;
+        }
+
+        .timer-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timer-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timer-display {
+            font-size: 72px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            touch-action: manipulation;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover, .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .edit-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .edit-field {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .edit-field:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .number-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .number-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .number-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: move;
+        }
+
+        .exercise-item.dragging {
+            opacity: 0.5;
+        }
+
+        .exercise-item h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+
+    <script>
+        const DEFAULT_WORKOUTS = {
+            epaules: {
+                name: 'Épaules',
+                sessions: [
+                    {
+                        id: 'epaules_avant',
+                        name: "Avant d'épaules",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Pike push-ups", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', restTime: 30 },
+                            { id: 4, name: "Maintien isométrique bras levés devant", description: "(haltères)", sets: 3, reps: null, duration: 30, type: 'duration', restTime: 30 },
+                            { id: 5, name: "Cercles de bras lents", description: "avec ou sans charge", sets: 2, reps: null, duration: 40, type: 'duration', restTime: 30 }
+                        ]
+                    },
+                    {
+                        id: 'epaules_largeur',
+                        name: "Largeur d'épaules",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Élévations latérales partielles", description: "bas du mouvement", sets: 3, reps: 20, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Upright row léger", description: "tirage poids bas vers menton", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 4, name: "Maintien latéral", description: "bras tendus à 90°", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30 },
+                            { id: 5, name: "Élévations latérales strictes", description: "jusqu'à l'échec", sets: 1, reps: 999, duration: null, type: 'reps', restTime: 30 }
+                        ]
+                    },
+                    {
+                        id: 'epaules_arriere',
+                        name: "Arrière d'épaules + stabilité",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Face pull", description: "buste penché, haltères pendants vers menton, coudes écartés", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Rowing haltères droit coudes ouverts", description: "bras droit, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 4, name: "Rowing haltères gauche coudes ouverts", description: "bras gauche, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 5, name: "Gainage bras tendus", description: "", sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30 },
+                            { id: 6, name: "Maintien bras écartés", description: "micro-mouvements, sans charge ou très légères", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30 }
+                        ]
+                    },
+                    {
+                        id: 'epaules_trapezes',
+                        name: "Trapèzes & nuque",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Shrugs haltères", description: "haussements d'épaules", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Shrugs lents avec pause", description: "2s de pause en haut de mouvement", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Farmer's walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30 },
+                            { id: 4, name: "Élévations W à Y au sol", description: "sans charge ou très légères", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30 },
+                            { id: 5, name: "Maintien haltères bras tendus derrière", description: "charge légère", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30 }
+                        ]
+                    },
+                    {
+                        id: 'epaules_completes',
+                        name: "Épaules complètes (hypertrophie maximale)",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 4, name: "Pike push-ups pieds surélevés", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', restTime: 30 },
+                            { id: 5, name: "Shrugs explosifs", description: "charge lourde", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 6, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 7, name: "Élévations latérales strictes léger", description: "charge légère", sets: 1, reps: 50, duration: null, type: 'reps', restTime: 30 }
+                        ]
+                    }
+                ]
+            },
+            avantBras: {
+                name: 'Avant-bras',
+                sessions: [
+                    {
+                        id: 'avantbras_interne',
+                        name: "Face interne",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30 },
+                            { id: 3, name: "Finger curls", description: "roule les haltères avec tes doigts", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 4, name: "Pompes sur poings", description: "", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30 },
+                            { id: 5, name: "Tenue isométrique des haltères", description: "bras pliés 90° devant buste, mains vers le haut", sets: 2, reps: null, duration: 20, type: 'duration', restTime: 30 }
+                        ]
+                    },
+                    {
+                        id: 'avantbras_externe',
+                        name: "Face externe",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Reverse curls", description: "mains vers le bas", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Wrist push-ups", description: "poignets retournés, doigts vers les genoux", sets: 3, reps: 8, duration: null, type: 'reps', restTime: 30 },
+                            { id: 4, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30 },
+                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20 },
+                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20 }
+                        ]
+                    },
+                    {
+                        id: 'avantbras_poigne',
+                        name: "Poigne & endurance de prise",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Farmer's Walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30 },
+                            { id: 2, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30 },
+                            { id: 3, name: "Pinch grip hold", description: "pince des disques d'haltères", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30 },
+                            { id: 4, name: "Zottman curls", description: "", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20 },
+                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20 }
+                        ]
+                    },
+                    {
+                        id: 'avantbras_hypertrophie',
+                        name: "Hypertrophie pure",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Hammer curls (prise neutre)", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30 },
+                            { id: 4, name: "Incline wrist curls", description: "avant-bras sur banc incliné", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30 },
+                            { id: 5, name: "Pompes sur doigts", description: "version progressive si trop difficile", sets: 2, reps: 999, duration: null, type: 'reps', restTime: 30 },
+                            { id: 6, name: "Hand grip droit", description: "", sets: 2, reps: 30, duration: null, type: 'reps', restTime: 20 },
+                            { id: 7, name: "Hand grip gauche", description: "", sets: 2, reps: 30, duration: null, type: 'reps', restTime: 20 }
+                        ]
+                    },
+                    {
+                        id: 'avantbras_force',
+                        name: "Force + isométrie",
+                        lastCompleted: null,
+                        exercises: [
+                            { id: 1, name: "Heavy wrist curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', restTime: 30 },
+                            { id: 2, name: "Heavy reverse curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', restTime: 30 },
+                            { id: 3, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30 },
+                            { id: 4, name: "Farmer's hold bras tendus devant", description: "", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30 },
+                            { id: 5, name: "Rotation lente des poignets avec haltère", description: "", sets: 2, reps: 15, duration: null, type: 'reps', restTime: 30 }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        class WorkoutApp {
+            constructor() {
+                this.workouts = {
+                    abdominaux: { name: 'Abdominaux', sessions: [] },
+                    pectoraux: { name: 'Pectoraux', sessions: [] },
+                    avantBras: { name: 'Avant-bras', sessions: [] },
+                    biceps: { name: 'Biceps', sessions: [] },
+                    epaules: { name: 'Épaules', sessions: [] },
+                    dos: { name: 'Dos', sessions: [] }
+                };
+                this.currentCategory = null;
+                this.currentSession = null;
+                this.currentExercise = null;
+                this.currentSet = 0;
+                this.checkedSets = [];
+                this.isResting = false;
+                this.timeLeft = 0;
+                this.isPaused = false;
+                this.view = 'menu';
+                this.timerInterval = null;
+                this.wakeLock = null;
+
+                this.loadData();
+                this.initDefaultData();
+                this.requestWakeLock();
+                this.render();
+            }
+
+            async requestWakeLock() {
+                try {
+                    if ('wakeLock' in navigator) {
+                        this.wakeLock = await navigator.wakeLock.request('screen');
+                        document.addEventListener('visibilitychange', async () => {
+                            if (this.wakeLock !== null && document.visibilityState === 'visible') {
+                                this.wakeLock = await navigator.wakeLock.request('screen');
+                            }
+                        });
+                    }
+                } catch (err) {
+                    console.log('Wake Lock non supporté:', err);
+                }
+            }
+
+            loadData() {
+                try {
+                    const saved = localStorage.getItem('workouts');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+
+                        Object.keys(data).forEach(key => {
+                            if (data[key].exercises && !data[key].sessions) {
+                                if (data[key].exercises.length > 0) {
+                                    data[key].sessions = [{
+                                        id: Date.now(),
+                                        name: 'Séance principale',
+                                        lastCompleted: null,
+                                        exercises: data[key].exercises
+                                    }];
+                                } else {
+                                    data[key].sessions = [];
+                                }
+                                delete data[key].exercises;
+                            }
+
+                            if (!data[key].sessions) {
+                                data[key].sessions = [];
+                            }
+                        });
+
+                        this.workouts = data;
+                    }
+                } catch (err) {
+                    console.error('Erreur de chargement:', err);
+                }
+            }
+
+            initDefaultData() {
+                const isFirstLoad = !localStorage.getItem('workouts');
+
+                if (isFirstLoad || this.workouts.epaules.sessions.length === 0) {
+                    this.workouts.epaules = DEFAULT_WORKOUTS.epaules;
+                }
+
+                if (isFirstLoad || this.workouts.avantBras.sessions.length === 0) {
+                    this.workouts.avantBras = DEFAULT_WORKOUTS.avantBras;
+                }
+
+                this.saveData();
+            }
+
+            saveData() {
+                try {
+                    localStorage.setItem('workouts', JSON.stringify(this.workouts));
+                } catch (err) {
+                    console.error('Erreur de sauvegarde:', err);
+                }
+            }
+
+            getTotalExercises(categoryKey) {
+                if (!this.workouts[categoryKey] || !this.workouts[categoryKey].sessions) {
+                    return 0;
+                }
+                return this.workouts[categoryKey].sessions.reduce((total, session) => {
+                    return total + (session.exercises ? session.exercises.length : 0);
+                }, 0);
+            }
+
+            formatLastCompleted(date) {
+                if (!date) return 'jamais';
+                const d = new Date(date);
+                const now = new Date();
+                const diffTime = now - d;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 0) return "aujourd'hui";
+                if (diffDays === 1) return 'hier';
+                if (diffDays < 7) return `il y a ${diffDays} jours`;
+                if (diffDays < 30) return `il y a ${Math.floor(diffDays / 7)} semaine${Math.floor(diffDays / 7) > 1 ? 's' : ''}`;
+
+                return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear()}`;
+            }
+
+            startTimer(seconds) {
+                this.isResting = true;
+                this.timeLeft = seconds;
+                this.isPaused = false;
+                this.updateTimer();
+                this.render();
+            }
+
+            updateTimer() {
+                if (this.timerInterval) clearInterval(this.timerInterval);
+
+                this.timerInterval = setInterval(() => {
+                    if (!this.isPaused && this.timeLeft > 0) {
+                        this.timeLeft--;
+
+                        // Mise à jour uniquement du timer display sans re-render complet
+                        const timerDisplay = document.querySelector('.timer-display');
+                        if (timerDisplay) {
+                            timerDisplay.textContent = this.formatTime(this.timeLeft);
+                        }
+
+                        if (this.timeLeft === 0) {
+                            this.isResting = false;
+                            clearInterval(this.timerInterval);
+                            this.render(); // Re-render complet seulement quand le timer se termine
+                        }
+                    }
+                }, 1000);
+            }
+
+            toggleTimer() {
+                this.isPaused = !this.isPaused;
+                this.render();
+            }
+
+            skipTimer() {
+                this.isResting = false;
+                this.timeLeft = 0;
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                this.render();
+            }
+
+            addTime(seconds) {
+                this.timeLeft += seconds;
+                const timerDisplay = document.querySelector('.timer-display');
+                if (timerDisplay) {
+                    timerDisplay.textContent = this.formatTime(this.timeLeft);
+                }
+            }
+
+            viewCategory(categoryKey) {
+                this.currentCategory = categoryKey;
+                this.view = 'sessions';
+                this.render();
+            }
+
+            startSession(sessionIndex) {
+                this.currentSession = sessionIndex;
+                this.currentExercise = 0;
+                this.currentSet = 0;
+                this.checkedSets = [];
+                this.view = 'workout';
+                this.render();
+            }
+
+            toggleSet(setIndex) {
+                const session = this.workouts[this.currentCategory].sessions[this.currentSession];
+                const exercise = session.exercises[this.currentExercise];
+                const index = this.checkedSets.indexOf(setIndex);
+
+                if (index > -1) {
+                    this.checkedSets.splice(index, 1);
+                } else {
+                    this.checkedSets.push(setIndex);
+
+                    if (this.checkedSets.length === exercise.sets) {
+                        this.completeExercise();
+                    } else if (setIndex === this.currentSet && setIndex < exercise.sets - 1) {
+                        this.currentSet = setIndex + 1;
+                        this.startTimer(exercise.restTime);
+                    }
+                }
+                this.render();
+            }
+
+            completeExercise() {
+                const session = this.workouts[this.currentCategory].sessions[this.currentSession];
+                if (this.currentExercise < session.exercises.length - 1) {
+                    this.currentExercise++;
+                    this.currentSet = 0;
+                    this.checkedSets = [];
+                    this.render();
+                } else {
+                    // Marquer la séance comme complétée
+                    this.workouts[this.currentCategory].sessions[this.currentSession].lastCompleted = new Date().toISOString();
+                    this.saveData();
+
+                    this.view = 'menu';
+                    this.currentCategory = null;
+                    this.currentSession = null;
+                    this.render();
+                }
+            }
+
+            goHome() {
+                this.view = 'menu';
+                this.currentCategory = null;
+                this.currentSession = null;
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                this.render();
+            }
+
+            backToSessions() {
+                this.view = 'sessions';
+                this.currentSession = null;
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                this.render();
+            }
+
+            addSession(categoryKey) {
+                const newId = Date.now();
+                this.workouts[categoryKey].sessions.push({
+                    id: newId,
+                    name: 'Nouvelle séance',
+                    lastCompleted: null,
+                    exercises: []
+                });
+                this.saveData();
+                this.render();
+            }
+
+            deleteSession(categoryKey, sessionIndex) {
+                if (confirm('Supprimer cette séance ?')) {
+                    this.workouts[categoryKey].sessions.splice(sessionIndex, 1);
+                    this.saveData();
+                    this.render();
+                }
+            }
+
+            editSession(sessionIndex, event) {
+                event.stopPropagation();
+                this.currentSession = sessionIndex;
+                this.view = 'edit';
+                this.render();
+            }
+
+            updateSession(categoryKey, sessionIndex, field, value) {
+                this.workouts[categoryKey].sessions[sessionIndex][field] = value;
+                this.saveData();
+                this.render();
+            }
+
+            toggleExerciseType(categoryKey, sessionIndex, exIndex) {
+                const exercise = this.workouts[categoryKey].sessions[sessionIndex].exercises[exIndex];
+                if (exercise.type === 'reps') {
+                    exercise.type = 'duration';
+                    exercise.duration = 30;
+                    exercise.reps = null;
+                } else {
+                    exercise.type = 'reps';
+                    exercise.reps = 10;
+                    exercise.duration = null;
+                }
+                this.saveData();
+                this.render();
+            }
+
+            updateExercise(categoryKey, sessionIndex, exIndex, field, value) {
+                this.workouts[categoryKey].sessions[sessionIndex].exercises[exIndex][field] = value;
+                this.saveData();
+                this.render();
+            }
+
+            adjustValue(categoryKey, sessionIndex, exIndex, field, delta) {
+                const current = this.workouts[categoryKey].sessions[sessionIndex].exercises[exIndex][field];
+                const newValue = Math.max(1, current + delta);
+                this.updateExercise(categoryKey, sessionIndex, exIndex, field, newValue);
+            }
+
+            addExercise(categoryKey, sessionIndex) {
+                const newId = Date.now();
+                this.workouts[categoryKey].sessions[sessionIndex].exercises.push({
+                    id: newId,
+                    name: 'Nouvel exercice',
+                    description: '',
+                    sets: 3,
+                    reps: 10,
+                    duration: null,
+                    type: 'reps',
+                    restTime: 60
+                });
+                this.saveData();
+                this.render();
+            }
+
+            deleteExercise(categoryKey, sessionIndex, exIndex) {
+                if (confirm('Supprimer cet exercice ?')) {
+                    this.workouts[categoryKey].sessions[sessionIndex].exercises.splice(exIndex, 1);
+                    this.saveData();
+                    this.render();
+                }
+            }
+
+            moveExercise(categoryKey, sessionIndex, fromIndex, toIndex) {
+                const exercises = this.workouts[categoryKey].sessions[sessionIndex].exercises;
+                const [moved] = exercises.splice(fromIndex, 1);
+                exercises.splice(toIndex, 0, moved);
+                this.saveData();
+                this.render();
+            }
+
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            render() {
+                const app = document.getElementById('app');
+
+                try {
+                    if (this.view === 'menu') {
+                        app.innerHTML = this.renderMenu();
+                    } else if (this.view === 'sessions') {
+                        app.innerHTML = this.renderSessions();
+                    } else if (this.view === 'workout') {
+                        app.innerHTML = this.renderWorkout();
+                    } else if (this.view === 'edit') {
+                        app.innerHTML = this.renderEdit();
+                    }
+
+                    this.attachEventListeners();
+                } catch (err) {
+                    console.error('Erreur de rendu:', err);
+                    app.innerHTML = `
+                        <div class="header">
+                            <h1>⚠️ Erreur</h1>
+                            <p>${err.message}</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="localStorage.clear(); location.reload();">
+                            Réinitialiser l'application
+                        </button>
+                    `;
+                }
+            }
+
+            renderMenu() {
+                return `
+                    <div class="header">
+                        <h1>💪 WorkoutPAL</h1>
+                        <p>Sélectionnez une catégorie</p>
+                    </div>
+                    <div class="menu-grid">
+                        ${Object.entries(this.workouts).map(([key, category]) => `
+                            <div class="workout-card" onclick="app.viewCategory('${key}')">
+                                <h3>${category.name}</h3>
+                                <p>${this.getTotalExercises(key)} exercice${this.getTotalExercises(key) > 1 ? 's' : ''}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            renderSessions() {
+                const category = this.workouts[this.currentCategory];
+
+                return `
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="app.goHome()">← Menu</button>
+                    </div>
+
+                    <div class="header">
+                        <h1>${category.name}</h1>
+                        <p>${category.sessions.length} séance${category.sessions.length > 1 ? 's' : ''}</p>
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 20px;" 
+                            onclick="app.addSession('${this.currentCategory}')">
+                        + Ajouter une séance
+                    </button>
+
+                    <div class="session-list">
+                        ${category.sessions.map((session, index) => `
+                            <div class="session-card" onclick="app.startSession(${index})">
+                                <div class="edit-icon" onclick="app.editSession(${index}, event)">
+                                    <span class="material-icons">edit</span>
+                                </div>
+                                <h3>${session.name}</h3>
+                                <p>${session.exercises.length} exercice${session.exercises.length > 1 ? 's' : ''}</p>
+                                <div class="last-completed">Dernière fois : ${this.formatLastCompleted(session.lastCompleted)}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${category.sessions.length === 0 ? `
+                        <div style="text-align: center; color: rgba(255, 255, 255, 0.5); padding: 40px 20px;">
+                            <p>Aucune séance pour le moment.</p>
+                            <p>Créez votre première séance personnalisée !</p>
+                        </div>
+                    ` : ''}
+                `;
+            }
+
+            renderWorkout() {
+                const category = this.workouts[this.currentCategory];
+                const session = category.sessions[this.currentSession];
+                const exercise = session.exercises[this.currentExercise];
+
+                if (!exercise) {
+                    return `
+                        <div class="header">
+                            <h1>Aucun exercice</h1>
+                            <p>Ajoutez des exercices en mode édition</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="app.backToSessions()">← Retour</button>
+                    `;
+                }
+
+                const totalExercises = session.exercises.length;
+                const currentExerciseNum = this.currentExercise + 1;
+                const progressPercent = (currentExerciseNum / totalExercises) * 100;
+
+                return `
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="app.backToSessions()">← Retour</button>
+                    </div>
+
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+                        </div>
+                        <div class="progress-text">${currentExerciseNum}/${totalExercises}</div>
+                    </div>
+
+                    <div class="exercise-view">
+                        <div class="exercise-header">
+                            <h2>${exercise.name}</h2>
+                            ${exercise.description ? `<div class="description">${exercise.description}</div>` : ''}
+                            <div class="reps-display">
+                                ${exercise.type === 'reps' ? `${exercise.reps} reps` : `${exercise.duration}s`}
+                            </div>
+                        </div>
+
+                        ${this.isResting ? `
+                            <div class="timer-container">
+                                <div class="timer-label">Repos</div>
+                                <div class="timer-display">${this.formatTime(this.timeLeft)}</div>
+                                <div class="timer-controls">
+                                    <button class="btn btn-secondary btn-small" onclick="app.toggleTimer()">
+                                        ${this.isPaused ? '▶️' : '⏸️'} ${this.isPaused ? 'Reprendre' : 'Pause'}
+                                    </button>
+                                    <button class="btn btn-secondary btn-small" onclick="app.addTime(20)">
+                                        +20s
+                                    </button>
+                                    <button class="btn btn-primary btn-small" onclick="app.skipTimer()">
+                                        Passer ⏭️
+                                    </button>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div class="sets-container">
+                            ${Array.from({ length: exercise.sets }, (_, i) => `
+                                <div class="set-tile ${this.checkedSets.includes(i) ? 'checked' : ''} ${i === this.currentSet && !this.checkedSets.includes(i) ? 'current' : ''}"
+                                     onclick="app.toggleSet(${i})">
+                                    ${this.checkedSets.includes(i) ? '✓' : `${i + 1}`}
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" 
+                                onclick="app.completeExercise()">
+                            ${this.currentExercise < totalExercises - 1 ? 'Exercice suivant →' : 'Terminer la séance ✓'}
+                        </button>
+                    </div>
+                `;
+            }
+
+            renderEdit() {
+                const category = this.workouts[this.currentCategory];
+                const session = category.sessions[this.currentSession];
+
+                return `
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="app.backToSessions()">← Retour</button>
+                    </div>
+
+                    <div class="header">
+                        <h1>${session.name}</h1>
+                        <p>Mode édition</p>
+                    </div>
+
+                    <div class="edit-controls" style="margin-bottom: 20px;">
+                        <input type="text" class="edit-field" value="${session.name}" 
+                               placeholder="Nom de la séance"
+                               onchange="app.updateSession('${this.currentCategory}', ${this.currentSession}, 'name', this.value)">
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 15px;" 
+                            onclick="app.addExercise('${this.currentCategory}', ${this.currentSession})">
+                        + Ajouter un exercice
+                    </button>
+
+                    <button class="btn btn-secondary" style="width: 100%; margin-bottom: 20px;" 
+                            onclick="app.deleteSession('${this.currentCategory}', ${this.currentSession})">
+                        🗑️ Supprimer cette séance
+                    </button>
+
+                    <div class="exercise-list" id="exerciseList">
+                        ${session.exercises.map((exercise, index) => `
+                            <div class="exercise-item" draggable="true" data-index="${index}">
+                                <h3>${exercise.name}</h3>
+                                <div class="edit-controls">
+                                    <input type="text" class="edit-field" value="${exercise.name}" 
+                                           placeholder="Nom de l'exercice"
+                                           onchange="app.updateExercise('${this.currentCategory}', ${this.currentSession}, ${index}, 'name', this.value)">
+                                </div>
+                                <div class="edit-controls">
+                                    <input type="text" class="edit-field" value="${exercise.description}" 
+                                           placeholder="Description"
+                                           onchange="app.updateExercise('${this.currentCategory}', ${this.currentSession}, ${index}, 'description', this.value)">
+                                </div>
+                                <div class="edit-controls">
+                                    <span style="min-width: 80px;">Séries:</span>
+                                    <div class="number-control">
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'sets', -1)">−</button>
+                                        <span class="number-display">${exercise.sets}</span>
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'sets', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="edit-controls">
+                                    <span style="min-width: 80px;">Type:</span>
+                                    <div class="toggle-buttons">
+                                        <button class="toggle-btn ${exercise.type === 'reps' ? 'active' : ''}" 
+                                                onclick="app.toggleExerciseType('${this.currentCategory}', ${this.currentSession}, ${index})">
+                                            Reps
+                                        </button>
+                                        <button class="toggle-btn ${exercise.type === 'duration' ? 'active' : ''}" 
+                                                onclick="app.toggleExerciseType('${this.currentCategory}', ${this.currentSession}, ${index})">
+                                            Durée (s)
+                                        </button>
+                                    </div>
+                                </div>
+                                ${exercise.type === 'reps' ? `
+                                    <div class="edit-controls">
+                                        <span style="min-width: 80px;">Reps:</span>
+                                        <div class="number-control">
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'reps', -1)">−</button>
+                                            <span class="number-display">${exercise.reps}</span>
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'reps', 1)">+</button>
+                                        </div>
+                                    </div>
+                                ` : `
+                                    <div class="edit-controls">
+                                        <span style="min-width: 80px;">Durée (s):</span>
+                                        <div class="number-control">
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'duration', -5)">−</button>
+                                            <span class="number-display">${exercise.duration}</span>
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'duration', 5)">+</button>
+                                        </div>
+                                    </div>
+                                `}
+                                <div class="edit-controls">
+                                    <span style="min-width: 80px;">Repos (s):</span>
+                                    <div class="number-control">
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'restTime', -10)">−</button>
+                                        <span class="number-display">${exercise.restTime}</span>
+                                        <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'restTime', 10)">+</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-small" style="width: 100%; margin-top: 10px;"
+                                        onclick="app.deleteExercise('${this.currentCategory}', ${this.currentSession}, ${index})">
+                                    🗑️ Supprimer
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            attachEventListeners() {
+                if (this.view === 'edit') {
+                    const list = document.getElementById('exerciseList');
+                    if (!list) return;
+
+                    let draggedElement = null;
+                    let draggedIndex = null;
+
+                    list.addEventListener('dragstart', (e) => {
+                        if (e.target.classList.contains('exercise-item')) {
+                            draggedElement = e.target;
+                            draggedIndex = parseInt(e.target.dataset.index);
+                            e.target.classList.add('dragging');
+                        }
+                    });
+
+                    list.addEventListener('dragend', (e) => {
+                        if (e.target.classList.contains('exercise-item')) {
+                            e.target.classList.remove('dragging');
+                        }
+                    });
+
+                    list.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        const afterElement = this.getDragAfterElement(list, e.clientY);
+                        if (afterElement == null) {
+                            list.appendChild(draggedElement);
+                        } else {
+                            list.insertBefore(draggedElement, afterElement);
+                        }
+                    });
+
+                    list.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        const items = [...list.querySelectorAll('.exercise-item')];
+                        const newIndex = items.indexOf(draggedElement);
+                        if (draggedIndex !== newIndex) {
+                            this.moveExercise(this.currentCategory, this.currentSession, draggedIndex, newIndex);
+                        }
+                    });
+                }
+            }
+
+            getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.exercise-item:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+        }
+
+        // Initialisation
+        const app = new WorkoutApp();
+
+        // Service Worker pour PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
