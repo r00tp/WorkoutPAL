@@ -837,6 +837,7 @@
                     if (!this.isPaused && this.timeLeft > 0) {
                         this.timeLeft--;
 
+                        // Mise à jour uniquement du timer display sans re-render complet
                         const timerDisplay = document.querySelector('.timer-display');
                         if (timerDisplay) {
                             timerDisplay.textContent = this.formatTime(this.timeLeft);
@@ -845,7 +846,7 @@
                         if (this.timeLeft === 0) {
                             this.isResting = false;
                             clearInterval(this.timerInterval);
-                            this.render();
+                            this.render(); // Re-render complet seulement quand le timer se termine
                         }
                     }
                 }, 1000);
