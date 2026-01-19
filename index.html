@@ -331,6 +331,16 @@
             font-size: 14px;
         }
 
+        .btn-max-toggle {
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+
+        .btn-max-toggle.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.25);
+        }
+
         .edit-controls {
             display: flex;
             gap: 10px;
@@ -388,6 +398,7 @@
 
         .number-control.disabled {
             opacity: 0.4;
+            pointer-events: none;
         }
 
         .number-btn {
@@ -405,33 +416,10 @@
             justify-content: center;
         }
 
-        .number-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-
         .number-display {
             min-width: 40px;
             text-align: center;
             font-weight: 600;
-        }
-
-        .max-btn {
-            padding: 6px 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.7);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .max-btn.active {
-            background: #667eea;
-            border-color: #667eea;
-            color: white;
         }
 
         .exercise-list {
@@ -481,11 +469,11 @@
                         name: "Avant d'épaules",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Pike push-ups", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Maintien isométrique bras levés devant", description: "(haltères)", sets: 3, reps: null, duration: 30, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 5, name: "Cercles de bras lents", description: "avec ou sans charge", sets: 2, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 }
+                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Pike push-ups", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: "Maintien isométrique bras levés devant", description: "(haltères)", sets: 3, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false },
+                            { id: 5, name: "Cercles de bras lents", description: "avec ou sans charge", sets: 2, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false }
                         ]
                     },
                     {
@@ -493,11 +481,11 @@
                         name: "Largeur d'épaules",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Élévations latérales partielles", description: "bas du mouvement", sets: 3, reps: 20, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Upright row léger", description: "tirage poids bas vers menton", sets: 3, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Maintien latéral", description: "bras tendus à 90°", sets: 3, reps: null, duration: 20, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 5, name: "Élévations latérales strictes", description: "jusqu'à l'échec", sets: 1, reps: 999, duration: null, type: 'reps', isMax: true, restTime: 30 }
+                            { id: 1, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Élévations latérales partielles", description: "bas du mouvement", sets: 3, reps: 20, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Upright row léger", description: "tirage poids bas vers menton", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: "Maintien latéral", description: "bras tendus à 90°", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false },
+                            { id: 5, name: "Élévations latérales strictes", description: "jusqu'à l'échec", sets: 1, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: true }
                         ]
                     },
                     {
@@ -505,12 +493,12 @@
                         name: "Arrière d'épaules + stabilité",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Face pull", description: "buste penché, haltères pendants vers menton, coudes écartés", sets: 3, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Rowing haltères droit coudes ouverts", description: "bras droit, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Rowing haltères gauche coudes ouverts", description: "bras gauche, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Gainage bras tendus", description: "", sets: 3, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 6, name: "Maintien bras écartés", description: "micro-mouvements, sans charge ou très légères", sets: 2, reps: null, duration: 30, type: 'duration', isMax: false, restTime: 30 }
+                            { id: 1, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Face pull", description: "buste penché, haltères pendants vers menton, coudes écartés", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Rowing haltères droit coudes ouverts", description: "bras droit, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: "Rowing haltères gauche coudes ouverts", description: "bras gauche, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: "Gainage bras tendus", description: "", sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
+                            { id: 6, name: "Maintien bras écartés", description: "micro-mouvements, sans charge ou très légères", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false }
                         ]
                     },
                     {
@@ -518,11 +506,11 @@
                         name: "Trapèzes & nuque",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Shrugs haltères", description: "haussements d'épaules", sets: 5, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Shrugs lents avec pause", description: "2s de pause en haut de mouvement", sets: 3, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Farmer's walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 4, name: "Élévations W à Y au sol", description: "sans charge ou très légères", sets: 3, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Maintien haltères bras tendus derrière", description: "charge légère", sets: 2, reps: null, duration: 30, type: 'duration', isMax: false, restTime: 30 }
+                            { id: 1, name: "Shrugs haltères", description: "haussements d'épaules", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Shrugs lents avec pause", description: "2s de pause en haut de mouvement", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Farmer's walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
+                            { id: 4, name: "Élévations W à Y au sol", description: "sans charge ou très légères", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: "Maintien haltères bras tendus derrière", description: "charge légère", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false }
                         ]
                     },
                     {
@@ -530,13 +518,13 @@
                         name: "Épaules complètes (hypertrophie maximale)",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Pike push-ups pieds surélevés", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Shrugs explosifs", description: "charge lourde", sets: 3, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 6, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 7, name: "Élévations latérales strictes léger", description: "charge légère", sets: 1, reps: 50, duration: null, type: 'reps', isMax: false, restTime: 30 }
+                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: "Pike push-ups pieds surélevés", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: "Shrugs explosifs", description: "charge lourde", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 6, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 7, name: "Élévations latérales strictes léger", description: "charge légère", sets: 1, reps: 50, duration: null, type: 'reps', restTime: 30, isMax: false }
                         ]
                     }
                 ]
@@ -549,11 +537,11 @@
                         name: "Face interne",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 3, name: "Finger curls", description: "roule les haltères avec tes doigts", sets: 3, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Pompes sur poings", description: "", sets: 3, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Tenue isométrique des haltères", description: "bras pliés 90° devant buste, mains vers le haut", sets: 2, reps: null, duration: 20, type: 'duration', isMax: false, restTime: 30 }
+                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
+                            { id: 3, name: "Finger curls", description: "roule les haltères avec tes doigts", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: "Pompes sur poings", description: "", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: "Tenue isométrique des haltères", description: "bras pliés 90° devant buste, mains vers le haut", sets: 2, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false }
                         ]
                     },
                     {
@@ -561,12 +549,12 @@
                         name: "Face externe",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Reverse curls", description: "mains vers le bas", sets: 3, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Wrist push-ups", description: "poignets retournés, doigts vers les genoux", sets: 3, reps: 8, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', isMax: false, restTime: 20 },
-                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', isMax: false, restTime: 20 }
+                            { id: 1, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Reverse curls", description: "mains vers le bas", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Wrist push-ups", description: "poignets retournés, doigts vers les genoux", sets: 3, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
+                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false },
+                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false }
                         ]
                     },
                     {
@@ -574,12 +562,12 @@
                         name: "Poigne & endurance de prise",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Farmer's Walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 2, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 2, reps: null, duration: 30, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 3, name: "Pinch grip hold", description: "pince des disques d'haltères", sets: 3, reps: null, duration: 20, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 4, name: "Zottman curls", description: "", sets: 3, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', isMax: false, restTime: 20 },
-                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', isMax: false, restTime: 20 }
+                            { id: 1, name: "Farmer's Walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
+                            { id: 2, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false },
+                            { id: 3, name: "Pinch grip hold", description: "pince des disques d'haltères", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false },
+                            { id: 4, name: "Zottman curls", description: "", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false },
+                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false }
                         ]
                     },
                     {
@@ -587,13 +575,13 @@
                         name: "Hypertrophie pure",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Hammer curls (prise neutre)", description: "", sets: 4, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Incline wrist curls", description: "avant-bras sur banc incliné", sets: 3, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Pompes sur doigts", description: "version progressive si trop difficile", sets: 2, reps: 999, duration: null, type: 'reps', isMax: true, restTime: 30 },
-                            { id: 6, name: "Hand grip droit", description: "", sets: 2, reps: 30, duration: null, type: 'reps', isMax: false, restTime: 20 },
-                            { id: 7, name: "Hand grip gauche", description: "", sets: 2, reps: 30, duration: null, type: 'reps', isMax: false, restTime: 20 }
+                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Hammer curls (prise neutre)", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: "Incline wrist curls", description: "avant-bras sur banc incliné", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: "Pompes sur doigts", description: "version progressive si trop difficile", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: true },
+                            { id: 6, name: "Hand grip droit", description: "", sets: 2, reps: 30, duration: null, type: 'reps', restTime: 20, isMax: false },
+                            { id: 7, name: "Hand grip gauche", description: "", sets: 2, reps: 30, duration: null, type: 'reps', restTime: 20, isMax: false }
                         ]
                     },
                     {
@@ -601,11 +589,11 @@
                         name: "Force + isométrie",
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Heavy wrist curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Heavy reverse curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 3, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 4, name: "Farmer's hold bras tendus devant", description: "", sets: 3, reps: null, duration: 20, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 5, name: "Rotation lente des poignets avec haltère", description: "", sets: 2, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 }
+                            { id: 1, name: "Heavy wrist curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: "Heavy reverse curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
+                            { id: 4, name: "Farmer's hold bras tendus devant", description: "", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false },
+                            { id: 5, name: "Rotation lente des poignets avec haltère", description: "", sets: 2, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false }
                         ]
                     }
                 ]
@@ -615,66 +603,66 @@
                 sessions: [
                     {
                         id: 'cuisses_quadriceps',
-                        name: "Quadriceps",
+                        name: 'Quadriceps',
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Squat haltères", description: "", sets: 5, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Bulgarian split squat (droite)", description: "jambe droite", sets: 4, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Bulgarian split squat (gauche)", description: "jambe gauche", sets: 4, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Squat tempo lent", description: "3 secondes de descente", sets: 3, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Wall sit (chaise)", description: "position chaise contre un mur", sets: 3, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 6, name: "Squats partiels bas du mouvement", description: "", sets: 1, reps: null, duration: null, type: 'reps', isMax: true, restTime: 60 }
+                            { id: 1, name: 'Squat haltères', description: '', sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: 'Bulgarian split squat (droite)', description: 'jambe droite', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: 'Bulgarian split squat (gauche)', description: 'jambe gauche', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: 'Squat tempo lent', description: '3 secondes de descente', sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: 'Wall sit (chaise)', description: 'position chaise contre un mur', sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
+                            { id: 6, name: 'Squats partiels bas du mouvement', description: '', sets: 1, reps: 15, duration: null, type: 'reps', restTime: 60, isMax: true }
                         ]
                     },
                     {
                         id: 'cuisses_ischios',
-                        name: "Ischios + fessiers",
+                        name: 'Ischios + fessiers',
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Romanian deadlift haltères", description: "", sets: 5, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Hip thrust au sol", description: "pour plus d'éfficacité : haltère sur le bassin", sets: 4, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Leg curl avec élastique", description: "", sets: 4, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Good morning haltère", description: "", sets: 3, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Pont fessier isométrique", description: "", sets: 2, reps: null, duration: 40, type: 'duration', isMax: false, restTime: 30 }
+                            { id: 1, name: 'Romanian deadlift haltères', description: '', sets: 5, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: 'Hip thrust au sol', description: "pour plus d'éfficacité : haltère sur le bassin", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: 'Leg curl avec élastique', description: '', sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: 'Good morning haltère', description: '', sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: 'Pont fessier isométrique', description: '', sets: 2, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false }
                         ]
                     },
                     {
                         id: 'cuisses_explosivite',
-                        name: "Explosivité & conditionnement",
+                        name: 'Explosivité & conditionnement',
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Corde à sauter", description: "", sets: 5, reps: null, duration: 45, type: 'duration', isMax: false, restTime: 15 },
-                            { id: 2, name: "Jump squats", description: "", sets: 4, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Fentes sautées (droite)", description: "jambe droite", sets: 3, reps: 8, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Fentes sautées (gauche)", description: "jambe gauche", sets: 3, reps: 8, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Squat haltère léger tempo rapide", description: "", sets: 3, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 6, name: "Sauts groupés sur place", description: "", sets: 2, reps: null, duration: null, type: 'reps', isMax: true, restTime: 60 }
+                            { id: 1, name: 'Corde à sauter', description: '', sets: 5, reps: null, duration: 45, type: 'duration', restTime: 15, isMax: false },
+                            { id: 2, name: 'Jump squats', description: '', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: 'Fentes sautées (droite)', description: 'jambe droite', sets: 3, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: 'Fentes sautées (gauche)', description: 'jambe gauche', sets: 3, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: 'Squat haltère léger tempo rapide', description: '', sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 6, name: 'Sauts groupés sur place', description: '', sets: 2, reps: 20, duration: null, type: 'reps', restTime: 60, isMax: true }
                         ]
                     },
                     {
                         id: 'cuisses_adducteurs',
-                        name: "Adducteurs + stabilité unilatérale",
+                        name: 'Adducteurs + stabilité unilatérale',
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Sumo squat haltère lourd", description: "", sets: 5, reps: 12, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Fentes latérales haltères (droite)", description: "jambe droite", sets: 4, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Fentes latérales haltères (gauche)", description: "jambe gauche", sets: 4, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Squat avec élastique", description: "élastique au-dessus des genoux", sets: 3, reps: 15, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Maintien en squat large", description: "", sets: 3, reps: null, duration: 30, type: 'duration', isMax: false, restTime: 30 },
-                            { id: 6, name: "Pulses en squat sumo", description: "", sets: 1, reps: 50, duration: null, type: 'reps', isMax: false, restTime: 60 }
+                            { id: 1, name: 'Sumo squat haltère lourd', description: '', sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: 'Fentes latérales haltères (droite)', description: 'jambe droite', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: 'Fentes latérales haltères (gauche)', description: 'jambe gauche', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: 'Squat avec élastique', description: "élastique au-dessus des genoux", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: 'Maintien en squat large', description: '', sets: 3, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false },
+                            { id: 6, name: 'Pulses en squat sumo', description: '', sets: 1, reps: 50, duration: null, type: 'reps', restTime: 60, isMax: false }
                         ]
                     },
                     {
                         id: 'cuisses_completes',
-                        name: "Cuisses complètes",
+                        name: 'Cuisses complètes',
                         lastCompleted: null,
                         exercises: [
-                            { id: 1, name: "Front squat haltères", description: "", sets: 4, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 2, name: "Walking lunges haltères", description: "1 rep = 1 pas", sets: 4, reps: 20, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 3, name: "Step-up sur support avec haltères", description: "jambe droite", sets: 3, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 4, name: "Step-up sur support avec haltères", description: "jambe gauche", sets: 3, reps: 10, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 5, name: "Squat pulse (bas du mouvement)", description: "", sets: 3, reps: 25, duration: null, type: 'reps', isMax: false, restTime: 30 },
-                            { id: 6, name: "Wall sit + haltères", description: "position chaise contre un mur", sets: 1, reps: null, duration: null, type: 'duration', isMax: true, restTime: 60 }
+                            { id: 1, name: 'Front squat haltères', description: '', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 2, name: 'Walking lunges haltères', description: '1 rep = 1 pas', sets: 4, reps: 20, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 3, name: 'Step-up sur support avec haltères droite', description: 'jambe droite', sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 4, name: 'Step-up sur support avec haltères gauche', description: 'jambe gauche', sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 5, name: 'Squat pulse (bas du mouvement)', description: '', sets: 3, reps: 25, duration: null, type: 'reps', restTime: 30, isMax: false },
+                            { id: 6, name: 'Wall sit + haltères', description: 'position chaise contre un mur', sets: 1, reps: null, duration: 40, type: 'duration', restTime: 60, isMax: true }
                         ]
                     }
                 ]
@@ -753,6 +741,15 @@
                         });
 
                         this.workouts = data;
+
+                        if (!this.workouts.jambes) {
+                            this.workouts.jambes = { name: 'Jambes', sessions: [] };
+                        }
+                        if (!this.workouts.cuisses) {
+                            this.workouts.cuisses = DEFAULT_WORKOUTS.cuisses;
+                        }
+
+                        this.normalizeWorkouts();
                     }
                 } catch (err) {
                     console.error('Erreur de chargement:', err);
@@ -774,7 +771,23 @@
                     this.workouts.cuisses = DEFAULT_WORKOUTS.cuisses;
                 }
 
+                this.normalizeWorkouts();
                 this.saveData();
+            }
+
+            normalizeWorkouts() {
+                Object.keys(this.workouts).forEach(key => {
+                    const category = this.workouts[key];
+                    if (!category.sessions) return;
+                    category.sessions.forEach(session => {
+                        if (!session.exercises) session.exercises = [];
+                        session.exercises.forEach(ex => {
+                            if (typeof ex.isMax === 'undefined') {
+                                ex.isMax = ex.reps === 999 ? true : false;
+                            }
+                        });
+                    });
+                });
             }
 
             saveData() {
@@ -963,11 +976,11 @@
                 const exercise = this.workouts[categoryKey].sessions[sessionIndex].exercises[exIndex];
                 if (exercise.type === 'reps') {
                     exercise.type = 'duration';
-                    exercise.duration = 30;
+                    exercise.duration = exercise.duration || 30;
                     exercise.reps = null;
                 } else {
                     exercise.type = 'reps';
-                    exercise.reps = 10;
+                    exercise.reps = exercise.reps || 10;
                     exercise.duration = null;
                 }
                 this.saveData();
@@ -988,7 +1001,11 @@
             }
 
             adjustValue(categoryKey, sessionIndex, exIndex, field, delta) {
-                const current = this.workouts[categoryKey].sessions[sessionIndex].exercises[exIndex][field];
+                const exercise = this.workouts[categoryKey].sessions[sessionIndex].exercises[exIndex];
+                if (exercise.isMax && (field === 'reps' || field === 'duration')) {
+                    return;
+                }
+                const current = exercise[field] || 0;
                 const newValue = Math.max(1, current + delta);
                 this.updateExercise(categoryKey, sessionIndex, exIndex, field, newValue);
             }
@@ -1003,8 +1020,8 @@
                     reps: 10,
                     duration: null,
                     type: 'reps',
-                    isMax: false,
-                    restTime: 60
+                    restTime: 60,
+                    isMax: false
                 });
                 this.saveData();
                 this.render();
@@ -1030,13 +1047,6 @@
                 const mins = Math.floor(seconds / 60);
                 const secs = seconds % 60;
                 return `${mins}:${secs.toString().padStart(2, '0')}`;
-            }
-
-            getExerciseDisplay(exercise) {
-                if (exercise.isMax) {
-                    return exercise.type === 'reps' ? 'max reps' : 'max durée';
-                }
-                return exercise.type === 'reps' ? `${exercise.reps} reps` : `${exercise.duration}s`;
             }
 
             render() {
@@ -1144,6 +1154,13 @@
                 const currentExerciseNum = this.currentExercise + 1;
                 const progressPercent = (currentExerciseNum / totalExercises) * 100;
 
+                let mainLabel = '';
+                if (exercise.isMax) {
+                    mainLabel = exercise.type === 'reps' ? 'max reps' : 'max durée';
+                } else {
+                    mainLabel = exercise.type === 'reps' ? `${exercise.reps} reps` : `${exercise.duration}s`;
+                }
+
                 return `
                     <div class="nav-buttons">
                         <button class="btn btn-secondary" onclick="app.backToSessions()">← Retour</button>
@@ -1160,7 +1177,9 @@
                         <div class="exercise-header">
                             <h2>${exercise.name}</h2>
                             ${exercise.description ? `<div class="description">${exercise.description}</div>` : ''}
-                            <div class="reps-display">${this.getExerciseDisplay(exercise)}</div>
+                            <div class="reps-display">
+                                ${mainLabel}
+                            </div>
                         </div>
 
                         ${this.isResting ? `
@@ -1238,7 +1257,7 @@
                                            onchange="app.updateExercise('${this.currentCategory}', ${this.currentSession}, ${index}, 'name', this.value)">
                                 </div>
                                 <div class="edit-controls">
-                                    <input type="text" class="edit-field" value="${exercise.description}" 
+                                    <input type="text" class="edit-field" value="${exercise.description || ''}" 
                                            placeholder="Description"
                                            onchange="app.updateExercise('${this.currentCategory}', ${this.currentSession}, ${index}, 'description', this.value)">
                                 </div>
@@ -1267,26 +1286,26 @@
                                     <div class="edit-controls">
                                         <span style="min-width: 80px;">Reps:</span>
                                         <div class="number-control ${exercise.isMax ? 'disabled' : ''}">
-                                            <button class="number-btn" ${exercise.isMax ? 'disabled' : ''} onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'reps', -1)">−</button>
-                                            <span class="number-display">${exercise.isMax ? 'max' : exercise.reps}</span>
-                                            <button class="number-btn" ${exercise.isMax ? 'disabled' : ''} onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'reps', 1)">+</button>
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'reps', -1)">−</button>
+                                            <span class="number-display">${exercise.reps}</span>
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'reps', 1)">+</button>
                                         </div>
-                                        <button class="max-btn ${exercise.isMax ? 'active' : ''}" 
+                                        <button class="btn btn-secondary btn-small btn-max-toggle ${exercise.isMax ? 'active' : ''}" 
                                                 onclick="app.toggleMax('${this.currentCategory}', ${this.currentSession}, ${index})">
-                                            MAX
+                                            max
                                         </button>
                                     </div>
                                 ` : `
                                     <div class="edit-controls">
                                         <span style="min-width: 80px;">Durée (s):</span>
                                         <div class="number-control ${exercise.isMax ? 'disabled' : ''}">
-                                            <button class="number-btn" ${exercise.isMax ? 'disabled' : ''} onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'duration', -5)">−</button>
-                                            <span class="number-display">${exercise.isMax ? 'max' : exercise.duration}</span>
-                                            <button class="number-btn" ${exercise.isMax ? 'disabled' : ''} onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'duration', 5)">+</button>
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'duration', -5)">−</button>
+                                            <span class="number-display">${exercise.duration}</span>
+                                            <button class="number-btn" onclick="app.adjustValue('${this.currentCategory}', ${this.currentSession}, ${index}, 'duration', 5)">+</button>
                                         </div>
-                                        <button class="max-btn ${exercise.isMax ? 'active' : ''}" 
+                                        <button class="btn btn-secondary btn-small btn-max-toggle ${exercise.isMax ? 'active' : ''}" 
                                                 onclick="app.toggleMax('${this.currentCategory}', ${this.currentSession}, ${index})">
-                                            MAX
+                                            max
                                         </button>
                                     </div>
                                 `}
