@@ -1,9 +1,9 @@
 # WorkoutPAL
-Un assistant d'entraînement pour suivre votre progression pendant votre séance d'entraînement.  
+Un assistant d'entraînement pour suivre sa progression pendant ses séances de musculation.  
 https://r00tp.github.io/WorkoutPAL/
 
 ## Fonctionnalités
-- ✅ 6 catégories et des séances prédéfinies
+- ✅ Catégories et séances d'exercices prédéfinies
 - ✅ Suivi des exercices, séries et répétitions
 - ✅ Timer de repos
 - ✅ Mode édition
