@@ -1156,13 +1156,15 @@
                 this.render();
             }
 
-            deleteSession(categoryKey, sessionIndex) {
-                if (confirm('Supprimer cette séance ?')) {
-                    this.workouts[categoryKey].sessions.splice(sessionIndex, 1);
-                    this.saveData();
-                    this.render();
-                }
-            }
+			deleteSession(categoryKey, sessionIndex) {
+				if (confirm('Supprimer cette séance ?')) {
+					this.workouts[categoryKey].sessions.splice(sessionIndex, 1);
+					this.saveData();
+					this.view = 'sessions';
+					this.currentSession = null;
+					this.render();
+				}
+			}
 
             editSession(sessionIndex, event) {
                 event.stopPropagation();
