@@ -608,229 +608,21 @@
     <div class="container" id="app"></div>
 
     <script>
-        const DEFAULT_WORKOUTS = {
-            epaules: {
-                name: 'Épaules',
-                sessions: [
-                    {
-                        id: 'epaules_avant',
-                        name: "Avant d'épaules",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Pike push-ups", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: "Maintien isométrique bras levés devant", description: "(haltères)", sets: 3, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false },
-                            { id: 5, name: "Cercles de bras lents", description: "avec ou sans charge", sets: 2, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'epaules_largeur',
-                        name: "Largeur d'épaules",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Élévations latérales partielles", description: "bas du mouvement", sets: 3, reps: 20, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Upright row léger", description: "tirage poids bas vers menton", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: "Maintien latéral", description: "bras tendus à 90°", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false },
-                            { id: 5, name: "Élévations latérales strictes", description: "jusqu'à l'échec", sets: 1, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: true }
-                        ]
-                    },
-                    {
-                        id: 'epaules_arriere',
-                        name: "Arrière d'épaules + stabilité",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Face pull", description: "buste penché, haltères pendants vers menton, coudes écartés", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Rowing haltères droit coudes ouverts", description: "bras droit, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: "Rowing haltères gauche coudes ouverts", description: "bras gauche, buste penché, haltère pendant vers poitrine", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: "Gainage bras tendus", description: "", sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
-                            { id: 6, name: "Maintien bras écartés", description: "micro-mouvements, sans charge ou très légères", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'epaules_trapezes',
-                        name: "Trapèzes & nuque",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Shrugs haltères", description: "haussements d'épaules", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Shrugs lents avec pause", description: "2s de pause en haut de mouvement", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Farmer's walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
-                            { id: 4, name: "Élévations W à Y au sol", description: "sans charge ou très légères", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: "Maintien haltères bras tendus derrière", description: "charge légère", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'epaules_completes',
-                        name: "Épaules complètes (hypertrophie maximale)",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Développé épaules avec haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Élévations latérales strictes", description: "bras à 90°", sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Élévations frontales haltères", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: "Pike push-ups pieds surélevés", description: "pompes en V", sets: 4, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: "Shrugs explosifs", description: "charge lourde", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 6, name: "Oiseau", description: "buste penché avec haltères", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 7, name: "Élévations latérales strictes léger", description: "charge légère", sets: 1, reps: 50, duration: null, type: 'reps', restTime: 30, isMax: false }
-                        ]
-                    }
-                ]
-            },
-            avantBras: {
-                name: 'Avant-bras',
-                sessions: [
-                    {
-                        id: 'avantbras_interne',
-                        name: "Face interne",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
-                            { id: 3, name: "Finger curls", description: "roule les haltères avec tes doigts", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: "Pompes sur poings", description: "", sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: "Tenue isométrique des haltères", description: "bras pliés 90° devant buste, mains vers le haut", sets: 2, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'avantbras_externe',
-                        name: "Face externe",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Reverse curls", description: "mains vers le bas", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Wrist push-ups", description: "poignets retournés, doigts vers les genoux", sets: 3, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: "Farmer's Hold", description: "", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
-                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false },
-                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'avantbras_poigne',
-                        name: "Poigne & endurance de prise",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Farmer's Walk", description: "charge lourde, en marchant", sets: 4, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
-                            { id: 2, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 2, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false },
-                            { id: 3, name: "Pinch grip hold", description: "pince des disques d'haltères", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false },
-                            { id: 4, name: "Zottman curls", description: "", sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: "Hand grip droit", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false },
-                            { id: 6, name: "Hand grip gauche", description: "", sets: 2, reps: 25, duration: null, type: 'reps', restTime: 20, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'avantbras_hypertrophie',
-                        name: "Hypertrophie pure",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Wrist curls", description: "travail des poignets", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Reverse wrist curls", description: "travail des poignets, mains vers le bas", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Hammer curls (prise neutre)", description: "", sets: 4, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: "Incline wrist curls", description: "avant-bras sur banc incliné", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: "Pompes sur doigts", description: "version progressive si trop difficile", sets: 2, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: true },
-                            { id: 6, name: "Hand grip droit", description: "", sets: 2, reps: 30, duration: null, type: 'reps', restTime: 20, isMax: false },
-                            { id: 7, name: "Hand grip gauche", description: "", sets: 2, reps: 30, duration: null, type: 'reps', restTime: 20, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'avantbras_force',
-                        name: "Force + isométrie",
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: "Heavy wrist curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: "Heavy reverse curls", description: "charge lourde", sets: 5, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: "Maintien haltères bras tendus en l'air", description: "charge lourde", sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
-                            { id: 4, name: "Farmer's hold bras tendus devant", description: "", sets: 3, reps: null, duration: 20, type: 'duration', restTime: 30, isMax: false },
-                            { id: 5, name: "Rotation lente des poignets avec haltère", description: "", sets: 2, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false }
-                        ]
-                    }
-                ]
-            },
-            cuisses: {
-                name: 'Cuisses',
-                sessions: [
-                    {
-                        id: 'cuisses_quadriceps',
-                        name: 'Quadriceps',
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: 'Squat haltères', description: '', sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: 'Bulgarian split squat (droite)', description: 'jambe droite', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: 'Bulgarian split squat (gauche)', description: 'jambe gauche', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: 'Squat tempo lent', description: '3 secondes de descente', sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: 'Wall sit (chaise)', description: 'position chaise contre un mur', sets: 3, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false },
-                            { id: 6, name: 'Squats partiels bas du mouvement', description: '', sets: 1, reps: 15, duration: null, type: 'reps', restTime: 60, isMax: true }
-                        ]
-                    },
-                    {
-                        id: 'cuisses_ischios',
-                        name: 'Ischios + fessiers',
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: 'Romanian deadlift haltères', description: '', sets: 5, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: 'Hip thrust au sol', description: "pour plus d'éfficacité : haltère sur le bassin", sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: 'Leg curl avec élastique', description: '', sets: 4, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: 'Good morning haltère', description: '', sets: 3, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: 'Pont fessier isométrique', description: '', sets: 2, reps: null, duration: 40, type: 'duration', restTime: 30, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'cuisses_explosivite',
-                        name: 'Explosivité & conditionnement',
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: 'Corde à sauter', description: '', sets: 5, reps: null, duration: 45, type: 'duration', restTime: 15, isMax: false },
-                            { id: 2, name: 'Jump squats', description: '', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: 'Fentes sautées (droite)', description: 'jambe droite', sets: 3, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: 'Fentes sautées (gauche)', description: 'jambe gauche', sets: 3, reps: 8, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: 'Squat haltère léger tempo rapide', description: '', sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 6, name: 'Sauts groupés sur place', description: '', sets: 2, reps: 20, duration: null, type: 'reps', restTime: 60, isMax: true }
-                        ]
-                    },
-                    {
-                        id: 'cuisses_adducteurs',
-                        name: 'Adducteurs + stabilité unilatérale',
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: 'Sumo squat haltère lourd', description: '', sets: 5, reps: 12, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: 'Fentes latérales haltères (droite)', description: 'jambe droite', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: 'Fentes latérales haltères (gauche)', description: 'jambe gauche', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: 'Squat avec élastique', description: "élastique au-dessus des genoux", sets: 3, reps: 15, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: 'Maintien en squat large', description: '', sets: 3, reps: null, duration: 30, type: 'duration', restTime: 30, isMax: false },
-                            { id: 6, name: 'Pulses en squat sumo', description: '', sets: 1, reps: 50, duration: null, type: 'reps', restTime: 60, isMax: false }
-                        ]
-                    },
-                    {
-                        id: 'cuisses_completes',
-                        name: 'Cuisses complètes',
-                        lastCompleted: null,
-                        lastDuration: null,
-                        exercises: [
-                            { id: 1, name: 'Front squat haltères', description: '', sets: 4, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 2, name: 'Walking lunges haltères', description: '1 rep = 1 pas', sets: 4, reps: 20, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 3, name: 'Step-up sur support avec haltères droite', description: 'jambe droite', sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 4, name: 'Step-up sur support avec haltères gauche', description: 'jambe gauche', sets: 3, reps: 10, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 5, name: 'Squat pulse (bas du mouvement)', description: '', sets: 3, reps: 25, duration: null, type: 'reps', restTime: 30, isMax: false },
-                            { id: 6, name: 'Wall sit + haltères', description: 'position chaise contre un mur', sets: 1, reps: null, duration: 40, type: 'duration', restTime: 60, isMax: true }
-                        ]
-                    }
-                ]
-            }
-        };
+        // Chargement du fichier JSON des workouts
+        let DEFAULT_WORKOUTS = {};
+
+        fetch('workouts-data.json')
+            .then(response => response.json())
+            .then(data => {
+                DEFAULT_WORKOUTS = data;
+                // Initialiser l'app après le chargement
+                window.app = new WorkoutApp();
+            })
+            .catch(err => {
+                console.error('Erreur de chargement des données:', err);
+                // Fallback: initialiser avec structure vide
+                window.app = new WorkoutApp();
+            });
 
         class WorkoutApp {
             constructor() {
@@ -857,7 +649,6 @@
                 this.wakeLock = null;
                 this.sessionStartTime = null;
 
-                // Audio notification
                 this.notificationSound = new Audio('data:audio/mpeg;base64,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genhM+xM0sZfuZ//tbuK7JHRYDpKh/reEtnlethb9u7evIszgwfQoC4pCLhcCOfHiTCmzrXZ6LVWdTr2v3crb+N////9n2BNS6kAK372jQA5qBwwqHxNUF3YGlkq//uAZPSA9RpYzntpfPgAAA/wAAABFEU7Ke2mF2AAAD/AAAAE1GNkiaShrEpfctClUcqW5TQO2v4hCpsYwOhOhRFiwdB3dmyz8AeIzACeENwOpzeGaJ4Xlovkm2Mk0PxEOBqLItLxKXM/E1FzpdxewhOKgqtWs8KiKn0KCImKNyaPnoiAC6RSAOcIig5jCENneAQmKARJasqnZ5Djdl6yJEm1nSAHDl6OQyVahl5XeWhhqz7zYBYTIps0CT/dXG9vJH/8b+M7NQETAIU239fCpURKez///////37EC8PDmAu4Jlq0kzgQGPuLWlLPWtZxNQUShBP10HgCyzzisAiNL///////////////9TberJMMVQdneDSWcAAAEC1LygsLzYTQpaGlzF0atK2ERHi6Xs1eDN/////////////////7wdmRzWFQ0cD1F6VdBkmQr3HEdKSEHlR1uylJyQYShwnst43ONd//////////+2Bk9gD0ZU3Le0ltaAAAD/AAAAENmPkt7CGT4AAAP8AAAAT/////42ZUosKFhBeomPHhhJI0B2d5VodxwAAABWEwFqatltFjzSVNRlhEJrL5umnmY5OrDstpg8SDXjALGf///////////9Ov/Z/opCWaHc5QFGVCRpzJUX3AWVVB0QyZvELMwJVIVvvaiT////////////////+PjLr6ahWJWsADK0+XChlr4NLrKAsQfnhSs+OYEOy3qSDP/////////////yupmKBVJelYiEBrIBBZ8Fj4q1ViRDAATZNcrVqtv5YMpRKmUlD9yYCgRprb0Vr/////////////7koYmVT/+1Bk6YPzASzKewkcWAAAD/AAAAEGwDMnzWFhoAAAP8AAAATa2azThIEgMFBW1oVKVSUQImAS8DR1Lljrev/HBBGIRJVE1UgCYvh79//tp6117VtRv//////83bpfVMlz3PKJM5iBGcIUAZFZDIwxApgQhgBjBHMBiQ4cwIJFEUAopQA54Ggd///VrW8R3qNEqhpxhQbB5JTd+n///19P//////6+261LtPoRSHQ9rKOJiJw16PFo4VQPMcPKLiwGoIDBI5iMLDVASUAAEARU//swZPQD8XoLSvMJwLgAAA/wAAABB9QzIcwnAoAAAD/AAAAEX+pJSYBmgNSXXGOBsgWJFT+3zF+7/3v/av2T/////nT0Q459Tz0MKWQwcc48oOGmHOcmYcK2JMTKoqFyB5Bg8qNhaUEdhGLDJYXmqPGCIAC6GAAcYn39U3GfA9sBlBShmZB7YpYiKT//ZP//9Kf///////oqo60v//sgZPkD8c4LynsMwDgAAA/wAAABBfAtJ8wnAuAAAD/AAAAEsV7GocxXcackWVXZxNZhxgkyDSRFhdhYoiiIUg4AwA6AAAMmxht/mIWEhbyKVIiNQTQnD6X/3vT3/t2ptZfXa/6//////unS/Q2YpyUctixrCQnqcXHlUVFRdRERh//7MGTzA/HKC0cjI8CgAAAP8AAAAQb8LRqMPwEAAAA/wAAABIPig0wo4IUeIiYqcaYWFRMCnEREWegACNgAfYB2v+oP2Jc1YbgzZdS////p///////9We1EXI+ahbMZC90GaoOgGQ6nBAgyocwkjFQGWdVADgAAAbDz/6xfF0vTYc5f//2///fv/////0/69nKyuVUbYyo5Bh3Fnf/7QGT2A/JveESjIBRyAAAP8AAAAQkd6RSMALHAAAA/wAAABAormGkliSxyIMZRQazjhJhUUAZmCx4gJnH4AeAAbmn/mg9JsP4sxL6fp+qa723p7/+nb/////WlGRDKrsVWKKCCOrEaqMIUOU5hoqJFU84fOKkdhBhw1ygUAxIODB0igBoAAAG5P/mA+C4gZmA5KPX0/W39aa8v2Vv/ff///fR9k6Ditv5RI6EYkpixBjuIHFxQ//tQZPOD8qp5xEJAPHIAAA/wAAABCPnlFIkAscgAAD/AAAAEYJqUeJEEREVDhTCcRHDA8NdQ8HA4IAQOhDAAFZABYNf+oQnGRLrFEXMff9P/////////0/rvzPQjmZ3K1Fo5WootF30ix3C4kMGEJHxFiDBzVUAGQAAB07/nAOjwlHoqgASZv//r1/XPZf7WXzra0/39u////6vOPachzRuQLKqsa5JkkjUWYTHzWOMLE6CK48c4jD4inikuwUPKoSJlxGBaYWIJyAen/6gUA//7QGT7A/KqesRCYCxgAAAP8AAAAQch5RaJgFPIAAA/wAAABKIKSLiX9f/7af/fT//////zf/tU7q9bWQQC6KiuzsRGdyhZjqQ4UQAwihIwsKQUJBMqwA0AAAVw1/8G8Ymmbo/1vT/p/t/////9Hoq2c1ytJbM0bO7GHRqKguznFCCiqJCbGOdxEYAIxmh4QE0cLGroAMAF5/+HQW7Ow4kP/7f//669kT902run/////+lGVWOT//swZPyD8hN5xMIALHIAAA/wAAABCKnnEwgAscgAAD/AAAAEMaY6PRkNRyKkXZnPID5jEjyJiC8oTEsRFOsEJYcHUFxIUhsgREAoGg8pggAApP/4TI++j/r///1/rM36dv/f9P///q+uqTXQ6kcXM6OhJREXUUfcUFlRwFUSFRBhIWDogOOweHCIqMDg4rgKQ4CgKKQgAJAHv/UI//tAZPSD8mF5xEIALHIAAA/wAAABBwHrFogAs8AAAD/AAAAEwneYPm/+r/7dP+9+/t/////f37M1zq5buxXG3O6oijBQaYgmNZyKQa4ixxBwFExKJBpji4qKBJBMSFhoyhVACAAADLf+UCYnjZ//+321/13r0/b9raf/////3q/NvdkpMfzjnEEUjiJRyDjoggwqIDQOPDguHBYGcPOMEh5UMLkBRQYQA//+j7Bz9k1/ztqqq97/+0Bk+wvyl3pDwUA8YAAAD/AAAAEHCekVBoBRwAAAP8AAAAS/T/X////6dc9t7siO1bM8izFWPNqVQWGjpZy5ccFRzyo0JnHGuLhLKhgYQHhgijcaD4jlRqNVAQABL/6vlBDf///////////b/y19fT1fW17F7rr2//v//616aqpbqpTNKL5LRth4CjCMKO8kLlihI6aqJj0YKMGDB5JAoiNmjjkT4DKiaJneAb/4UbQXf/b////7MGT+A/HzecTBoCzyAAAP8AAAAQlx5xEGgPGIAAA/wAAABP//////76q6K/KR0QnYjXd7nRx1OwlEUquRCqdGdAZyCDmCAAhlAQAH/7tRR39f7M/t/bf16r//////vRr0UzdpjGKxI5GMNG55xdTziQ4Y5CTHipdibIijJx40PEkREGrlio1LiYoFSpxRT/8xtgK/T7fz2f7/d//7QGT1A/I8ecQpoCv2AAAP8AAAAQh55xEDgLHAAAA/wAAABP20NZU+6Pt9bd////1s6HuuOVVEY090VSZo4OF6HHg9HxhyY4cKGKDqlxxC5YmEwjjw2GgaGSZAdJiKNIoMAA0AAH/+Dwh2yf0//+nt0/////////Tolq1ZHOdaIi6sQwy6o85yIOEBg4w4a6FODMaylFZhMUEwQB/8QuJfs3M9//9r//v//////7525zWpXmK5//tAZPgL8il5REDgLGIAAA/wAAABCKXnEQUA8cgAAD/AAAAEqCdh82exY5CJxIasw0IKcRMJlDzXDnHxuSHxe48QEQAMAABv/gSDcz/6f/X//1////////+6t59Goy1pMFkd3BEuiIVEKDcsEdlYxioKECEEHWgB//gnwtm2//9P2/t//////9NX9F6HLZZaPWdnYyK4E4t1UQMLMGMUQRAIGhoJUP/zff//t//uz3X/////////+zBk+4vyhHrDqOVOcAAAD/AAAAEGAesXA4BTwAAAP8AAAAQ/RstC0WxisxlcrLkFBNjGqHjuA9AKLxIXERYBzBgsgmHw7AdzCJJUL/5c3/3v/////t/////+/tRZkpPdSaMREIdY+LFLmdzEi6nFUKMEmOLi7xAVKcOAKQgoyj//ROAf///////////L+Z4JFukDUhEmQ3A7QBH/+0Bk9w/yLHnEKEA8cgAAD/AAAAEJTeEOA4DvyAAAP8AAAATqZQWAjOX/9/L/hf3PL3l7UNQz9Kwjry6Gk0DMUOTtdSBKq0kbHEURIcZFYoIDAICUowhLsIjdhMAhKjHgSVkz//9ft/+vv/r//p//////am0uzUYpUMk4s6WZhiyEcWFyiIs4sJuJB0PkKPHnZBADBNgFUEGOigIAB/+CG7///1//b////////06SN/ZGqqbLO//7MGT4A/HDecVBQCxyAAAP8AAAAQdR5RKggPHIAAA/wAAABCTmOk6tUc51iGMSYIIOjmCsGApEf/msxf/66L3/////////+/7JeiMQtUGVoIx+zOQ1XOo0Ra5hhkEBIxgmJFFYRIICpynEhQRV//r/5Nu/+nb/9P+/6////6vUxDOyR0jo7DyEiwirsII1xESQpmMZA8gmHaC0UP/7IGT6i/GcecVBQBRyAAAP8AAAAQXt5xUGgFPQAAA/wAAABMEgIJDjsUQYDiYdD4fH//iX//379+Z7dVocib3Vun+vp////302S2lyZ7pWXPPPoO5Yqx7hAMEB4eKFSJQUNOB6jCsMmCONC4PB4CYXHQfoSKC4aklV//rn/9P+3Xb/+zBk+AvxvHnEgCAscgAAD/AAAAEGkecUoICxwAAAP8AAAAT3dfXe//ft6dP///2+bTRTnVWdFQ+c7jWPuhRDTB2aeWRyRUdLuSPUbOpI2QUaj5KKGDzpUf/1xf///8v//5lofV9Jsl3UMek6sShQ50qg6AzpGFmQYBcYCDW1//Nf/+r/+//Zd+np/Z/9//////nTbMdlOhjSuxz/+0Bk/g/y33rCgEFN8AAAD/AAAAEG1ecSAICxwAAAP8AAAATjFGirOh0dVKcVE1EQQwdIYUFQ6gKIgRBUGAgsHBEKEnR/+a/39u/+un0/U6tzaf///+mte7vv4+VCuMKwijmUiEK51IJCwuR0QgqJJOMCIDDxQMFzHDgiAbigi5BQikxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqv/7IGT9i/F0eEWoQBR2AAAP8AAAAQa15xKggLHIAAA/wAAABKqqqqqqqqqqqqqqTEFNRTMuMTAwqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+zBE+g/wAAB/gAAACAAAD/AAAAEHhecQAICxyRy9YcAQHfiqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+zBk9Avx4njEACA78gAAD/AAAAEEyd0UoIB3yAAAP8AAAASqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+zBE/o/x8XnEACAr8D1PSIAEBY4AAAH+AAAAIAAAP8AAAASqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+xBk3Y/wAAB/gAAACAAAD/AAAAEAAAGkAAAAIAAANIAAAASqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqg==');
                 this.notificationSound.volume = 0.7;
 
@@ -926,7 +717,10 @@
                             this.workouts.jambes = { name: 'Jambes', sessions: [] };
                         }
                         if (!this.workouts.cuisses) {
-                            this.workouts.cuisses = DEFAULT_WORKOUTS.cuisses;
+                            this.workouts.cuisses = DEFAULT_WORKOUTS.cuisses || { name: 'Cuisses', sessions: [] };
+                        }
+                        if (!this.workouts.pectoraux) {
+                            this.workouts.pectoraux = DEFAULT_WORKOUTS.pectoraux || { name: 'Pectoraux', sessions: [] };
                         }
 
                         this.normalizeWorkouts();
@@ -939,15 +733,19 @@
             initDefaultData() {
                 const isFirstLoad = !localStorage.getItem('workouts');
 
-                if (isFirstLoad || this.workouts.epaules.sessions.length === 0) {
+                if (DEFAULT_WORKOUTS.pectoraux && (isFirstLoad || this.workouts.pectoraux.sessions.length === 0)) {
+                    this.workouts.pectoraux = DEFAULT_WORKOUTS.pectoraux;
+                }
+
+                if (DEFAULT_WORKOUTS.epaules && (isFirstLoad || this.workouts.epaules.sessions.length === 0)) {
                     this.workouts.epaules = DEFAULT_WORKOUTS.epaules;
                 }
 
-                if (isFirstLoad || this.workouts.avantBras.sessions.length === 0) {
+                if (DEFAULT_WORKOUTS.avantBras && (isFirstLoad || this.workouts.avantBras.sessions.length === 0)) {
                     this.workouts.avantBras = DEFAULT_WORKOUTS.avantBras;
                 }
 
-                if (isFirstLoad || this.workouts.cuisses.sessions.length === 0) {
+                if (DEFAULT_WORKOUTS.cuisses && (isFirstLoad || this.workouts.cuisses.sessions.length === 0)) {
                     this.workouts.cuisses = DEFAULT_WORKOUTS.cuisses;
                 }
 
@@ -1036,7 +834,15 @@
                             this.isResting = false;
                             clearInterval(this.timerInterval);
                             this.playNotification();
-                            this.render();
+
+                            const session = this.workouts[this.currentCategory].sessions[this.currentSession];
+                            const exercise = session.exercises[this.currentExercise];
+
+                            if (this.checkedSets.length === exercise.sets) {
+                                this.completeExercise();
+                            } else {
+                                this.render();
+                            }
                         }
                     }
                 }, 1000);
@@ -1088,9 +894,7 @@
                 } else {
                     this.checkedSets.push(setIndex);
 
-                    if (this.checkedSets.length === exercise.sets) {
-                        this.completeExercise();
-                    } else if (setIndex === this.currentSet && setIndex < exercise.sets - 1) {
+                    if (setIndex === this.currentSet && setIndex < exercise.sets) {
                         this.currentSet = setIndex + 1;
                         this.startTimer(exercise.restTime);
                     }
@@ -1156,15 +960,15 @@
                 this.render();
             }
 
-			deleteSession(categoryKey, sessionIndex) {
-				if (confirm('Supprimer cette séance ?')) {
-					this.workouts[categoryKey].sessions.splice(sessionIndex, 1);
-					this.saveData();
-					this.view = 'sessions';
-					this.currentSession = null;
-					this.render();
-				}
-			}
+            deleteSession(categoryKey, sessionIndex) {
+                if (confirm('Supprimer cette séance ?')) {
+                    this.workouts[categoryKey].sessions.splice(sessionIndex, 1);
+                    this.saveData();
+                    this.view = 'sessions';
+                    this.currentSession = null;
+                    this.render();
+                }
+            }
 
             editSession(sessionIndex, event) {
                 event.stopPropagation();
@@ -1458,18 +1262,7 @@
 
                 return `
                     <div class="confetti-container">
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
-                        <div class="confetti"></div>
+                        ${Array.from({ length: 12 }, () => '<div class="confetti"></div>').join('')}
                     </div>
                     <div class="completion-screen">
                         <div class="close-btn" onclick="app.goHome()">✕</div>
@@ -1656,8 +1449,6 @@
                 }, { offset: Number.NEGATIVE_INFINITY }).element;
             }
         }
-
-        const app = new WorkoutApp();
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
