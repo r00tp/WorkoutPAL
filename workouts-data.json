@@ -1,0 +1,1425 @@
+{
+  "pectoraux": {
+    "name": "Pectoraux",
+    "sessions": [
+      {
+        "id": "pectoraux_moyens",
+        "name": "Pectoraux moyens (épaisseur)",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Pompes classiques",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Développé couché haltères",
+            "description": "au sol ou sur banc",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Pompes tempo lent",
+            "description": "3 sec de descente",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Maintien isométrique bras semi-fléchis",
+            "description": "position pompe",
+            "sets": 2,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Pompes partielles",
+            "description": "bas du mouvement",
+            "sets": 1,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 60,
+            "isMax": true
+          }
+        ]
+      },
+      {
+        "id": "pectoraux_superieurs",
+        "name": "Pectoraux supérieurs",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Pompes inclinées pieds surélevés",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Développé incliné haltères",
+            "description": "ou épaules surélevées",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Écartés inclinés haltères",
+            "description": "",
+            "sets": 3,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Squeeze press",
+            "description": "haltères serrées l'une contre l'autre",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Maintien haltères serrées bras tendus",
+            "description": "",
+            "sets": 2,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "pectoraux_etirement",
+        "name": "Étirement & congestion",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Écartés haltères amplitude maximale",
+            "description": "",
+            "sets": 4,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Pompes larges",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Pompes profondes",
+            "description": "sur supports si possible",
+            "sets": 3,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Pullover haltère",
+            "description": "",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Pompes lentes",
+            "description": "",
+            "sets": 1,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 60,
+            "isMax": true
+          }
+        ]
+      },
+      {
+        "id": "pectoraux_force",
+        "name": "Force & tension mécanique",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Développé couché haltères lourd",
+            "description": "",
+            "sets": 5,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 45,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Pompes lestées",
+            "description": "ou tempo très lent",
+            "sets": 4,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Développé haltères prise neutre",
+            "description": "",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Isométrie bras à mi-parcours",
+            "description": "",
+            "sets": 2,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Squeeze pectoral statique",
+            "description": "mains serrées fort",
+            "sets": 2,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "pectoraux_complets",
+        "name": "Pectoraux complets",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Pompes",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 45,
+            "isMax": true
+          },
+          {
+            "id": 2,
+            "name": "Développé haltères",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 45,
+            "isMax": true
+          },
+          {
+            "id": 3,
+            "name": "Écartés inclinés haltères",
+            "description": "",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Squeeze press",
+            "description": "haltères serrées l'une contre l'autre",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Pompes en diamant",
+            "description": "",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 45,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Pullover haltère lent",
+            "description": "",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 7,
+            "name": "Pompes partielles + maintien",
+            "description": "maintient 3s en bas de mouvement",
+            "sets": 1,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 60,
+            "isMax": true
+          }
+        ]
+      }
+    ]
+  },
+  "epaules": {
+    "name": "Épaules",
+    "sessions": [
+      {
+        "id": "epaules_avant",
+        "name": "Avant d'épaules",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Développé épaules avec haltères",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Élévations frontales haltères",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Pike push-ups",
+            "description": "pompes en V",
+            "sets": 4,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Maintien isométrique bras levés devant",
+            "description": "(haltères)",
+            "sets": 3,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Cercles de bras lents",
+            "description": "avec ou sans charge",
+            "sets": 2,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "epaules_largeur",
+        "name": "Largeur d'épaules",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Élévations latérales strictes",
+            "description": "bras à 90°",
+            "sets": 5,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Élévations latérales partielles",
+            "description": "bas du mouvement",
+            "sets": 3,
+            "reps": 20,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Upright row léger",
+            "description": "tirage poids bas vers menton",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Maintien latéral",
+            "description": "bras tendus à 90°",
+            "sets": 3,
+            "reps": null,
+            "duration": 20,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Élévations latérales strictes",
+            "description": "jusqu'à l'échec",
+            "sets": 1,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": true
+          }
+        ]
+      },
+      {
+        "id": "epaules_arriere",
+        "name": "Arrière d'épaules + stabilité",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Oiseau",
+            "description": "buste penché avec haltères",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Face pull",
+            "description": "buste penché, haltères pendants vers menton, coudes écartés",
+            "sets": 3,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Rowing haltères droit coudes ouverts",
+            "description": "bras droit, buste penché, haltère pendant vers poitrine",
+            "sets": 2,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Rowing haltères gauche coudes ouverts",
+            "description": "bras gauche, buste penché, haltère pendant vers poitrine",
+            "sets": 2,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Gainage bras tendus",
+            "description": "",
+            "sets": 3,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Maintien bras écartés",
+            "description": "micro-mouvements, sans charge ou très légères",
+            "sets": 2,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "epaules_trapezes",
+        "name": "Trapèzes & nuque",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Shrugs haltères",
+            "description": "haussements d'épaules",
+            "sets": 5,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Shrugs lents avec pause",
+            "description": "2s de pause en haut de mouvement",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Farmer's walk",
+            "description": "charge lourde, en marchant",
+            "sets": 4,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Élévations W à Y au sol",
+            "description": "sans charge ou très légères",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Maintien haltères bras tendus derrière",
+            "description": "charge légère",
+            "sets": 2,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "epaules_completes",
+        "name": "Épaules complètes (hypertrophie maximale)",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Développé épaules avec haltères",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Élévations latérales strictes",
+            "description": "bras à 90°",
+            "sets": 5,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Élévations frontales haltères",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Pike push-ups pieds surélevés",
+            "description": "pompes en V",
+            "sets": 4,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Shrugs explosifs",
+            "description": "charge lourde",
+            "sets": 3,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Oiseau",
+            "description": "buste penché avec haltères",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 7,
+            "name": "Élévations latérales strictes léger",
+            "description": "charge légère",
+            "sets": 1,
+            "reps": 50,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      }
+    ]
+  },
+  "avantBras": {
+    "name": "Avant-bras",
+    "sessions": [
+      {
+        "id": "avantbras_interne",
+        "name": "Face interne",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Wrist curls",
+            "description": "travail des poignets",
+            "sets": 4,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Farmer's Hold",
+            "description": "",
+            "sets": 4,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Finger curls",
+            "description": "roule les haltères avec tes doigts",
+            "sets": 3,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Pompes sur poings",
+            "description": "",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Tenue isométrique des haltères",
+            "description": "bras pliés 90° devant buste, mains vers le haut",
+            "sets": 2,
+            "reps": null,
+            "duration": 20,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "avantbras_externe",
+        "name": "Face externe",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Reverse wrist curls",
+            "description": "travail des poignets, mains vers le bas",
+            "sets": 4,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Reverse curls",
+            "description": "mains vers le bas",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Wrist push-ups",
+            "description": "poignets retournés, doigts vers les genoux",
+            "sets": 3,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Farmer's Hold",
+            "description": "",
+            "sets": 4,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Hand grip droit",
+            "description": "",
+            "sets": 2,
+            "reps": 25,
+            "duration": null,
+            "type": "reps",
+            "restTime": 20,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Hand grip gauche",
+            "description": "",
+            "sets": 2,
+            "reps": 25,
+            "duration": null,
+            "type": "reps",
+            "restTime": 20,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "avantbras_poigne",
+        "name": "Poigne & endurance de prise",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Farmer's Walk",
+            "description": "charge lourde, en marchant",
+            "sets": 4,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Maintien haltères bras tendus en l'air",
+            "description": "charge lourde",
+            "sets": 2,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Pinch grip hold",
+            "description": "pince des disques d'haltères",
+            "sets": 3,
+            "reps": null,
+            "duration": 20,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Zottman curls",
+            "description": "",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Hand grip droit",
+            "description": "",
+            "sets": 2,
+            "reps": 25,
+            "duration": null,
+            "type": "reps",
+            "restTime": 20,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Hand grip gauche",
+            "description": "",
+            "sets": 2,
+            "reps": 25,
+            "duration": null,
+            "type": "reps",
+            "restTime": 20,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "avantbras_hypertrophie",
+        "name": "Hypertrophie pure",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Wrist curls",
+            "description": "travail des poignets",
+            "sets": 4,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Reverse wrist curls",
+            "description": "travail des poignets, mains vers le bas",
+            "sets": 4,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Hammer curls (prise neutre)",
+            "description": "",
+            "sets": 4,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Incline wrist curls",
+            "description": "avant-bras sur banc incliné",
+            "sets": 3,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Pompes sur doigts",
+            "description": "version progressive si trop difficile",
+            "sets": 2,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": true
+          },
+          {
+            "id": 6,
+            "name": "Hand grip droit",
+            "description": "",
+            "sets": 2,
+            "reps": 30,
+            "duration": null,
+            "type": "reps",
+            "restTime": 20,
+            "isMax": false
+          },
+          {
+            "id": 7,
+            "name": "Hand grip gauche",
+            "description": "",
+            "sets": 2,
+            "reps": 30,
+            "duration": null,
+            "type": "reps",
+            "restTime": 20,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "avantbras_force",
+        "name": "Force + isométrie",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Heavy wrist curls",
+            "description": "charge lourde",
+            "sets": 5,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Heavy reverse curls",
+            "description": "charge lourde",
+            "sets": 5,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Maintien haltères bras tendus en l'air",
+            "description": "charge lourde",
+            "sets": 3,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Farmer's hold bras tendus devant",
+            "description": "",
+            "sets": 3,
+            "reps": null,
+            "duration": 20,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Rotation lente des poignets avec haltère",
+            "description": "",
+            "sets": 2,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      }
+    ]
+  },
+  "cuisses": {
+    "name": "Cuisses",
+    "sessions": [
+      {
+        "id": "cuisses_quadriceps",
+        "name": "Quadriceps",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Squat haltères",
+            "description": "",
+            "sets": 5,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Bulgarian split squat (droite)",
+            "description": "jambe droite",
+            "sets": 4,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Bulgarian split squat (gauche)",
+            "description": "jambe gauche",
+            "sets": 4,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Squat tempo lent",
+            "description": "3 secondes de descente",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Wall sit (chaise)",
+            "description": "position chaise contre un mur",
+            "sets": 3,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Squats partiels bas du mouvement",
+            "description": "",
+            "sets": 1,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 60,
+            "isMax": true
+          }
+        ]
+      },
+      {
+        "id": "cuisses_ischios",
+        "name": "Ischios + fessiers",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Romanian deadlift haltères",
+            "description": "",
+            "sets": 5,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Hip thrust au sol",
+            "description": "pour plus d'éfficacité : haltère sur le bassin",
+            "sets": 4,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Leg curl avec élastique",
+            "description": "",
+            "sets": 4,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Good morning haltère",
+            "description": "",
+            "sets": 3,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Pont fessier isométrique",
+            "description": "",
+            "sets": 2,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "cuisses_explosivite",
+        "name": "Explosivité & conditionnement",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Corde à sauter",
+            "description": "",
+            "sets": 5,
+            "reps": null,
+            "duration": 45,
+            "type": "duration",
+            "restTime": 15,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Jump squats",
+            "description": "",
+            "sets": 4,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Fentes sautées (droite)",
+            "description": "jambe droite",
+            "sets": 3,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Fentes sautées (gauche)",
+            "description": "jambe gauche",
+            "sets": 3,
+            "reps": 8,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Squat haltère léger tempo rapide",
+            "description": "",
+            "sets": 3,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Sauts groupés sur place",
+            "description": "",
+            "sets": 2,
+            "reps": 20,
+            "duration": null,
+            "type": "reps",
+            "restTime": 60,
+            "isMax": true
+          }
+        ]
+      },
+      {
+        "id": "cuisses_adducteurs",
+        "name": "Adducteurs + stabilité unilatérale",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Sumo squat haltère lourd",
+            "description": "",
+            "sets": 5,
+            "reps": 12,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Fentes latérales haltères (droite)",
+            "description": "jambe droite",
+            "sets": 4,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Fentes latérales haltères (gauche)",
+            "description": "jambe gauche",
+            "sets": 4,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Squat avec élastique",
+            "description": "élastique au-dessus des genoux",
+            "sets": 3,
+            "reps": 15,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Maintien en squat large",
+            "description": "",
+            "sets": 3,
+            "reps": null,
+            "duration": 30,
+            "type": "duration",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Pulses en squat sumo",
+            "description": "",
+            "sets": 1,
+            "reps": 50,
+            "duration": null,
+            "type": "reps",
+            "restTime": 60,
+            "isMax": false
+          }
+        ]
+      },
+      {
+        "id": "cuisses_completes",
+        "name": "Cuisses complètes",
+        "lastCompleted": null,
+        "lastDuration": null,
+        "exercises": [
+          {
+            "id": 1,
+            "name": "Front squat haltères",
+            "description": "",
+            "sets": 4,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 2,
+            "name": "Walking lunges haltères",
+            "description": "1 rep = 1 pas",
+            "sets": 4,
+            "reps": 20,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 3,
+            "name": "Step-up sur support avec haltères droite",
+            "description": "jambe droite",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 4,
+            "name": "Step-up sur support avec haltères gauche",
+            "description": "jambe gauche",
+            "sets": 3,
+            "reps": 10,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 5,
+            "name": "Squat pulse (bas du mouvement)",
+            "description": "",
+            "sets": 3,
+            "reps": 25,
+            "duration": null,
+            "type": "reps",
+            "restTime": 30,
+            "isMax": false
+          },
+          {
+            "id": 6,
+            "name": "Wall sit + haltères",
+            "description": "position chaise contre un mur",
+            "sets": 1,
+            "reps": null,
+            "duration": 40,
+            "type": "duration",
+            "restTime": 60,
+            "isMax": true
+          }
+        ]
+      }
+    ]
+  }
+}
