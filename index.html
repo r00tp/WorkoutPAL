@@ -634,7 +634,7 @@
 
         class WorkoutApp {
             constructor() {
-                this.version = '1.7.0'; // APPVERSION
+                this.version = '1.7.1'; // APPVERSION
                 this.workouts = {
                     abdominaux: { name: 'Abdominaux', sessions: [] },
                     pectoraux: { name: 'Pectoraux', sessions: [] },
@@ -662,19 +662,6 @@
                 this.notificationSound.volume = 0.8;
                 this.soundUnlocked = false;
 
-                document.addEventListener('click', () => {
-                    if (!this.soundUnlocked) {
-                        this.notificationSound.play().then(() => {
-                            this.notificationSound.pause();
-                            this.notificationSound.currentTime = 0;
-                            this.soundUnlocked = true;
-                            console.log('Son débloqué');
-                        }).catch(err => {
-                            console.log('Erreur déblocage son:', err);
-                        });
-                    }
-                }, { once: true });
-
                 this.loadData();
                 this.initDefaultData();
                 this.requestWakeLock();
@@ -698,14 +685,21 @@
 
             playNotification() {
                 try {
+                    // fix PWA iOS
+                    this.notificationSound.load();
                     this.notificationSound.currentTime = 0;
+                    
                     const playPromise = this.notificationSound.play();
                     
                     if (playPromise !== undefined) {
-                        playPromise.catch(err => {
-                            console.log('Lecture audio bloquée:', err);
-                            this.triggerHaptic();
-                        });
+                        playPromise
+                            .then(() => {
+                                console.log('Son joué avec succès');
+                            })
+                            .catch(err => {
+                                console.log('Lecture audio bloquée:', err);
+                                this.triggerHaptic();
+                            });
                     }
                 } catch (err) {
                     console.log('Erreur lecture audio:', err);
@@ -924,6 +918,20 @@
             }
 
             startSession(sessionIndex) {
+                if (!this.soundUnlocked) {
+                    try {
+                        this.notificationSound.play().then(() => {
+                            this.notificationSound.pause();
+                            this.notificationSound.currentTime = 0;
+                            this.soundUnlocked = true;
+                            console.log('🔊 Son débloqué au démarrage de la séance');
+                        }).catch(err => {
+                            console.log('Erreur déblocage son:', err);
+                        });
+                    } catch (err) {
+                        console.log('Erreur déblocage son:', err);
+                    }
+                }
                 this.currentSession = sessionIndex;
                 this.currentExercise = 0;
                 this.currentSet = 0;
