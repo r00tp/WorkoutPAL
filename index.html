@@ -634,7 +634,7 @@
 
         class WorkoutApp {
             constructor() {
-                this.version = '1.7.1'; // APPVERSION
+                this.version = '1.7.2'; // APPVERSION
                 this.workouts = {
                     abdominaux: { name: 'Abdominaux', sessions: [] },
                     pectoraux: { name: 'Pectoraux', sessions: [] },
@@ -665,21 +665,36 @@
                 this.loadData();
                 this.initDefaultData();
                 this.requestWakeLock();
+
+                document.addEventListener('visibilitychange', async () => {
+                        if (document.visibilityState === 'visible' && this.view === 'workout') {
+                            console.log('App visible, réactivation Wake Lock');
+                            await this.requestWakeLock();
+                        }
+                });
+
                 this.render();
             }
 
             async requestWakeLock() {
                 try {
                     if ('wakeLock' in navigator) {
+                        if (this.wakeLock !== null) {
+                            try {
+                                await this.wakeLock.release();
+                            } catch (e) {}
+                        }
                         this.wakeLock = await navigator.wakeLock.request('screen');
-                        document.addEventListener('visibilitychange', async () => {
-                            if (this.wakeLock !== null && document.visibilityState === 'visible') {
-                                this.wakeLock = await navigator.wakeLock.request('screen');
-                            }
+                        console.log('Wake Lock activé');
+                        
+                        this.wakeLock.addEventListener('release', () => {
+                            console.log('Wake Lock libéré');
+                            this.wakeLock = null;
                         });
                     }
                 } catch (err) {
-                    console.log('Wake Lock non supporté:', err);
+                    console.log('Wake Lock refusé:', err);
+                    this.wakeLock = null;
                 }
             }
 
@@ -924,7 +939,7 @@
                             this.notificationSound.pause();
                             this.notificationSound.currentTime = 0;
                             this.soundUnlocked = true;
-                            console.log('🔊 Son débloqué au démarrage de la séance');
+                            console.log('Son débloqué au démarrage de la séance');
                         }).catch(err => {
                             console.log('Erreur déblocage son:', err);
                         });
@@ -932,6 +947,8 @@
                         console.log('Erreur déblocage son:', err);
                     }
                 }
+
+                this.requestWakeLock();
                 this.currentSession = sessionIndex;
                 this.currentExercise = 0;
                 this.currentSet = 0;
