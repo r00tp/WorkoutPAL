@@ -11,4 +11,4 @@ https://r00tp.github.io/WorkoutPAL/
 - ✅ Sauvegarde locale, aucune données partagées
 - ✅ Installation en mode PWA (option navigateur -> Ajouter à l'écran d'accueil)
 
-*Version 1.7.0*
+*Version 1.7.1*
