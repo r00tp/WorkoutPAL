@@ -1,4 +1,4 @@
-# WorkoutPAL
+# 💪WorkoutPAL
 Un assistant d'entraînement pour suivre sa progression pendant ses séances de musculation.  
 https://r00tp.github.io/WorkoutPAL/
 
