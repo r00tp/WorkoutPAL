@@ -112,6 +112,14 @@
             transform: scale(1.1);
         }
 
+        .version-footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            margin-top: 30px;
+            padding: 10px;
+        }
+
         .session-list {
             display: flex;
             flex-direction: column;
@@ -626,6 +634,7 @@
 
         class WorkoutApp {
             constructor() {
+                this.version = '1.6.2'; // APPVERSION
                 this.workouts = {
                     abdominaux: { name: 'Abdominaux', sessions: [] },
                     pectoraux: { name: 'Pectoraux', sessions: [] },
@@ -857,8 +866,17 @@
                 this.isResting = false;
                 this.timeLeft = 0;
                 if (this.timerInterval) clearInterval(this.timerInterval);
-                this.render();
+                
+                const session = this.workouts[this.currentCategory].sessions[this.currentSession];
+                const exercise = session.exercises[this.currentExercise];
+                
+                if (this.checkedSets.length === exercise.sets) {
+                    this.completeExercise();
+                } else {
+                    this.render();
+                }
             }
+
 
             addTime(seconds) {
                 this.timeLeft += seconds;
@@ -1105,6 +1123,7 @@
                             </div>
                         `).join('')}
                     </div>
+                    <div class="version-footer">v${this.version}</div>
                 `;
             }
 
